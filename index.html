@@ -8,35 +8,42 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root{
-  --ink:#1e2a4a;--muted:#6b7a99;--line:#e6ebf4;--card:#fff;
-  --blue:#3b82f6;--blue-d:#2563eb;--green:#16a34a;--green-l:#dcfce7;
-  --red:#dc2626;--red-l:#fee2e2;--yellow:#f59e0b;--purple:#7c3aed;--purple-l:#ede9fe;
-}
+:root{--ink:#1e2a4a;--muted:#6b7a99;--line:#e6ebf4;--blue:#3b82f6;--blue-d:#2563eb;--green:#16a34a;--green-l:#dcfce7;--red:#dc2626;--red-l:#fee2e2;--purple:#7c3aed;--purple-l:#ede9fe;--orange:#f97316}
 *{box-sizing:border-box}
 html,body{margin:0}
-body{font-family:'Nunito',system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink);
-  background:radial-gradient(circle at 10% 0%,#dbeafe 0,transparent 45%),radial-gradient(circle at 100% 30%,#fae8ff 0,transparent 40%),#f5f8ff;min-height:100vh}
-.wrap{max-width:860px;margin:0 auto;padding:18px 14px 48px}
-.screen{display:none}.screen.active{display:block;animation:fade .35s ease}
-@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-.card{background:var(--card);border-radius:26px;padding:24px;box-shadow:0 12px 34px rgba(30,42,74,.08);margin-top:16px}
-h1{font-size:clamp(26px,5vw,38px);font-weight:900;margin:4px 0 2px;line-height:1.15}
+body{font-family:'Nunito',system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink);min-height:100vh;overflow-x:hidden;
+  background:linear-gradient(180deg,#e0f2fe 0%,#f0f9ff 40%,#ecfccb 100%)}
+.bg{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.bg span{position:absolute;bottom:-70px;opacity:.16;animation:rise linear infinite}
+@keyframes rise{to{transform:translateY(-125vh) rotate(30deg)}}
+.wrap{position:relative;z-index:1;max-width:880px;margin:0 auto;padding:18px 14px 56px}
+.screen{display:none}.screen.active{display:block;animation:fade .4s ease}
+@keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.card{background:#fff;border-radius:26px;padding:22px;box-shadow:0 12px 34px rgba(30,42,74,.08);margin-top:16px}
+h1{font-size:clamp(26px,5vw,40px);font-weight:900;margin:4px 0 2px;line-height:1.15}
 h2{font-size:22px;font-weight:900;margin:0 0 12px}
 .sub{color:var(--muted);font-weight:700;margin:0}
-.hero{display:flex;align-items:center;gap:16px}
-.hero .big{font-size:64px;line-height:1;animation:float 3s ease-in-out infinite}
-@keyframes float{50%{transform:translateY(-8px) rotate(-6deg)}}
+.hero{display:flex;align-items:center;gap:14px}
+.hero .animals{font-size:46px;line-height:1;white-space:nowrap}
+.hero .animals span{display:inline-block;animation:bob 2.4s ease-in-out infinite}
+.hero .animals span:nth-child(2){animation-delay:.3s}.hero .animals span:nth-child(3){animation-delay:.6s}.hero .animals span:nth-child(4){animation-delay:.9s}
+@keyframes bob{50%{transform:translateY(-8px)}}
 label.lbl{display:block;font-weight:800;margin:0 0 8px}
 .name{width:100%;max-width:340px;font:inherit;font-size:18px;font-weight:700;padding:12px 16px;border:2px solid var(--line);border-radius:14px;outline:none}
 .name:focus{border-color:var(--blue)}
-.topics{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
-.topic{position:relative;display:flex;align-items:center;gap:10px;padding:12px 14px;border:2px solid var(--line);border-radius:16px;cursor:pointer;font-weight:800;font-size:15px;user-select:none;transition:.15s}
-.topic input{position:absolute;opacity:0;pointer-events:none}
-.topic .ic{font-size:24px}
-.topic:hover{border-color:#bfd3f8}
+.quarters{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.qbtn{position:relative;border:3px solid var(--line);background:#fff;border-radius:22px;padding:14px 12px 12px;cursor:pointer;text-align:center;font:inherit;color:var(--ink);transition:.15s}
+.qbtn:hover{transform:translateY(-3px);border-color:#bfd3f8}
+.qbtn .an{font-size:46px;display:block;line-height:1.1}
+.qbtn b{display:block;font-size:18px;font-weight:900;margin-top:4px}
+.qbtn small{display:block;color:var(--muted);font-weight:700;font-size:12.5px;margin-top:4px;line-height:1.3}
+.qbtn.on{border-color:var(--orange);background:#fff7ed;box-shadow:0 8px 20px rgba(249,115,22,.18)}
+.qbtn.on .an{animation:jump .7s ease}
+.topics{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:9px}
+.topic{position:relative;display:flex;align-items:center;gap:10px;padding:10px 12px;border:2px solid var(--line);border-radius:15px;cursor:pointer;font-weight:800;font-size:14.5px;user-select:none;transition:.15s}
+.topic .ic{font-size:22px}
 .topic.on{border-color:var(--blue);background:#eff6ff}
-.topic.on::after{content:"✓";position:absolute;right:10px;top:8px;color:var(--blue);font-weight:900}
+.topic.on::after{content:"✓";position:absolute;right:9px;top:6px;color:var(--blue);font-weight:900}
 .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 .pill{border:2px solid var(--line);background:#fff;border-radius:999px;padding:8px 18px;font:inherit;font-weight:800;font-size:16px;cursor:pointer;color:var(--ink)}
 .pill.on{background:var(--blue);border-color:var(--blue);color:#fff}
@@ -45,132 +52,165 @@ label.lbl{display:block;font-weight:800;margin:0 0 8px}
 .btn.green{background:#22c55e;box-shadow:0 5px 0 #15803d}
 .btn.purple{background:var(--purple);box-shadow:0 5px 0 #5b21b6}
 .btn.ghost{background:#fff;color:var(--ink);box-shadow:0 5px 0 #d6deea;border:2px solid var(--line)}
-.btn[disabled]{opacity:.5;cursor:not-allowed}
 .linkbtn{background:none;border:none;font:inherit;color:var(--muted);font-weight:800;cursor:pointer;text-decoration:underline;padding:6px}
 .mt{margin-top:18px}.center{text-align:center}
 .small{font-size:14px;color:var(--muted);font-weight:700}
-
-/* game */
+.note{background:#fff7ed;border-radius:14px;padding:10px 14px;font-weight:700;font-size:14px;color:#9a3412;margin-top:12px}
 .topbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
 .chips{display:flex;gap:8px;flex-wrap:wrap}
 .chip{background:#fff;border-radius:999px;padding:7px 14px;font-weight:900;box-shadow:0 4px 14px rgba(30,42,74,.07);font-size:16px}
-.track{position:relative;height:46px;margin:18px 6px 0;background:#fff;border-radius:999px;box-shadow:inset 0 0 0 2px var(--line)}
-.track .fill{position:absolute;left:0;top:0;bottom:0;border-radius:999px;background:linear-gradient(90deg,#bfdbfe,#c4b5fd);transition:width .5s ease}
-.track .rocket{position:absolute;top:50%;font-size:30px;transform:translate(-50%,-50%) rotate(45deg);transition:left .5s ease}
-.track .planet{position:absolute;right:-6px;top:50%;transform:translateY(-50%);font-size:34px}
+.chip.pop{animation:pop .4s}
+.track{position:relative;height:56px;margin:16px 26px 0 6px;background:repeating-linear-gradient(90deg,#d9f99d 0 18px,#bef264 18px 36px);border-radius:999px;box-shadow:inset 0 0 0 3px #a3e635}
+.track .runner{position:absolute;top:50%;font-size:38px;transform:translate(-50%,-55%);transition:left .6s cubic-bezier(.3,1.4,.6,1)}
+.track .goal{position:absolute;right:-22px;top:50%;transform:translateY(-50%);font-size:40px;animation:bob 1.8s ease-in-out infinite}
 .dots{display:flex;gap:5px;justify-content:center;margin-top:12px;flex-wrap:wrap}
 .dot{width:14px;height:14px;border-radius:50%;background:#dfe6f2}
 .dot.ok{background:#22c55e}.dot.bad{background:#ef4444}.dot.cur{outline:3px solid var(--blue);outline-offset:2px}
-.qcard{text-align:center;padding:28px 22px 26px}
+.mrow{display:flex;align-items:flex-end;gap:10px;margin-top:14px}
+.mascot{font-size:66px;line-height:1;display:inline-block;animation:bob 2.4s ease-in-out infinite;filter:drop-shadow(0 6px 6px rgba(0,0,0,.12))}
+.mascot.jump{animation:jump .8s ease}
+.mascot.sad{animation:sad .7s ease}
+@keyframes jump{0%{transform:none}30%{transform:translateY(-34px) rotate(-12deg) scale(1.15)}60%{transform:translateY(0) scale(1.1,.9)}100%{transform:none}}
+@keyframes sad{20%,60%{transform:rotate(-14deg)}40%,80%{transform:rotate(14deg)}}
+.bubble{position:relative;background:#fff;border-radius:18px;padding:10px 16px;font-weight:800;box-shadow:0 6px 18px rgba(30,42,74,.08);margin-bottom:18px;max-width:520px}
+.bubble::before{content:"";position:absolute;left:-9px;bottom:14px;border:10px solid transparent;border-right-color:#fff;border-left:0}
+.bubble.pop{animation:pop .35s}
+.qcard{text-align:center;padding:26px 20px 24px;margin-top:8px}
+.qcard.enter{animation:slideIn .45s cubic-bezier(.2,1.2,.5,1)}
+@keyframes slideIn{from{opacity:0;transform:translateX(40px) rotate(2deg)}to{opacity:1;transform:none}}
 .tag{display:inline-flex;align-items:center;gap:6px;background:var(--purple-l);color:var(--purple);font-weight:900;border-radius:999px;padding:6px 14px;font-size:14px}
-.qtext{font-size:clamp(34px,8vw,54px);font-weight:900;margin:18px 0 8px;letter-spacing:.5px}
-.qtext.word{font-size:clamp(19px,3.6vw,23px);font-weight:700;text-align:left;line-height:1.5;letter-spacing:0;max-width:640px;margin:18px auto 8px}
+.qtext{font-size:clamp(32px,7.5vw,52px);font-weight:900;margin:16px 0 8px;letter-spacing:.5px;white-space:pre-wrap}
+.qtext.word{font-size:clamp(19px,3.6vw,23px);font-weight:700;text-align:left;line-height:1.55;letter-spacing:0;max-width:660px;margin:16px auto 8px}
+.fr{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;font-size:.8em;line-height:1.05;margin:0 3px;font-weight:900}
+.fr span:first-child{border-bottom:2px solid currentColor;padding:0 3px}
 .qhint{color:var(--muted);font-weight:800;margin:0 0 6px}
-.answers{display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap;margin:16px 0 6px;font-size:24px;font-weight:900}
+.answers{display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap;margin:16px 0 6px;font-size:22px;font-weight:900}
 .ans{width:150px;font:inherit;font-size:32px;font-weight:900;text-align:center;padding:10px 8px;border:3px solid #c9d6ee;border-radius:16px;outline:none;color:var(--ink);background:#fbfcff}
-.ans.short{width:96px}
+.ans.short{width:100px}
 .ans:focus{border-color:var(--blue);box-shadow:0 0 0 5px #dbeafe}
-.ans.ok{border-color:#22c55e;background:var(--green-l)}
-.ans.bad{border-color:#ef4444;background:var(--red-l)}
+.ans.ok,.opt.ok{border-color:#22c55e!important;background:var(--green-l)!important}
+.ans.bad,.opt.bad{border-color:#ef4444!important;background:var(--red-l)!important}
+.opt{min-width:110px;font:inherit;font-size:28px;font-weight:900;padding:12px 20px;border:3px solid #c9d6ee;border-radius:18px;background:#fbfcff;cursor:pointer;color:var(--ink);transition:transform .1s}
+.opt:hover:not(:disabled){transform:translateY(-3px);border-color:var(--blue)}
+.opt:disabled{cursor:default}
 .shake{animation:shake .35s}
 @keyframes shake{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
-.fb{min-height:0;margin:14px auto 0;max-width:520px;border-radius:18px;padding:0;font-weight:900;font-size:20px;overflow:hidden}
+.fb{margin:14px auto 0;max-width:540px;border-radius:18px;font-weight:900;font-size:20px;overflow:hidden}
 .fb.ok{background:var(--green-l);color:var(--green);padding:14px 18px;animation:pop .3s}
 .fb.bad{background:var(--red-l);color:var(--red);padding:14px 18px;animation:pop .3s}
 .fb .t{font-size:15px;font-weight:800;opacity:.85;margin-top:4px}
-@keyframes pop{0%{transform:scale(.9);opacity:0}100%{transform:scale(1);opacity:1}}
+@keyframes pop{0%{transform:scale(.85);opacity:0}100%{transform:scale(1);opacity:1}}
 .actions{display:flex;justify-content:center;gap:12px;margin-top:20px;flex-wrap:wrap}
 .fig{display:block;margin:6px auto 0}
 .timer{font-variant-numeric:tabular-nums}
-
-/* results */
+.spark{position:fixed;pointer-events:none;font-size:22px;z-index:60;transform:translate(-50%,-50%);animation:spark .9s ease-out forwards}
+@keyframes spark{to{transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(.3) rotate(180deg);opacity:0}}
+.podium{position:relative;height:250px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.rays{position:absolute;width:520px;height:520px;border-radius:50%;background:repeating-conic-gradient(rgba(251,191,36,.28) 0 10deg,transparent 10deg 20deg);animation:spin 14s linear infinite;-webkit-mask:radial-gradient(circle,#000 25%,transparent 65%);mask:radial-gradient(circle,#000 25%,transparent 65%)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.trophy{position:relative;animation:drop 1s cubic-bezier(.3,1.5,.5,1) both}
+.trophy svg{filter:drop-shadow(0 12px 16px rgba(0,0,0,.18));animation:glow 2.5s ease-in-out 1s infinite}
+@keyframes drop{from{transform:translateY(-260px) scale(.4) rotate(-20deg);opacity:0}to{transform:none;opacity:1}}
+@keyframes glow{50%{transform:scale(1.05) rotate(2deg)}}
+.party{display:flex;justify-content:center;gap:14px;font-size:44px;margin-top:-8px}
+.party span{display:inline-block;animation:dance 1s ease-in-out infinite}
+.party span:nth-child(odd){animation-delay:.25s}
+@keyframes dance{0%,100%{transform:translateY(0) rotate(-8deg)}50%{transform:translateY(-16px) rotate(8deg)}}
 .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
-.tile{background:#f7f9fe;border-radius:18px;padding:14px 16px}
-.tile .v{font-size:30px;font-weight:900}
+.tile{background:#f7f9fe;border-radius:18px;padding:14px 16px;text-align:left}
+.tile .v{font-size:28px;font-weight:900}
 .tile .k{color:var(--muted);font-weight:800;font-size:14px}
 .bars{display:flex;flex-direction:column;gap:7px}
 .bar{display:grid;grid-template-columns:44px 1fr 70px;align-items:center;gap:10px;font-weight:800;font-size:14px}
 .bar .b{height:22px;border-radius:8px;background:#eef2f9;position:relative;overflow:hidden}
-.bar .b i{position:absolute;left:0;top:0;bottom:0;border-radius:8px}
+.bar .b i{position:absolute;left:0;top:0;bottom:0;border-radius:8px;animation:grow .8s ease both}
+@keyframes grow{from{width:0}}
 .bar .b span{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:12px;white-space:nowrap;color:var(--ink);font-weight:800}
 .legend{display:flex;gap:16px;font-size:14px;font-weight:800;color:var(--muted);margin-bottom:10px}
 .legend i{display:inline-block;width:12px;height:12px;border-radius:4px;margin-right:5px;vertical-align:-1px}
 .tbl-wrap{overflow-x:auto}
 table{width:100%;border-collapse:collapse;font-size:15px}
-th{text-align:left;color:var(--muted);font-weight:800;font-size:13px;padding:8px 8px;border-bottom:2px solid var(--line);white-space:nowrap}
+th{text-align:left;color:var(--muted);font-weight:800;font-size:13px;padding:8px;border-bottom:2px solid var(--line);white-space:nowrap}
 td{padding:9px 8px;border-bottom:1px solid var(--line);font-weight:700;vertical-align:top}
-td.q{max-width:280px}
+td.q{max-width:300px}
 tr.bad td{background:#fff7f7}
 .ok-t{color:var(--green);font-weight:900}.bad-t{color:var(--red);font-weight:900}
-.medal{font-size:72px;line-height:1}
+.shelf{display:flex;flex-direction:column;gap:8px}
+.shelf .sr{display:flex;align-items:center;gap:12px;background:#f7f9fe;border-radius:16px;padding:8px 12px;flex-wrap:wrap}
+.shelf .sr b{min-width:150px}
+.cup{display:inline-flex;align-items:center;gap:2px;font-weight:900}
 .hist{display:flex;flex-direction:column;gap:6px}
-.hist div{display:flex;justify-content:space-between;background:#f7f9fe;border-radius:12px;padding:8px 12px;font-weight:800;font-size:14px}
+.hist div{display:flex;justify-content:space-between;gap:8px;background:#f7f9fe;border-radius:12px;padding:8px 12px;font-weight:800;font-size:14px;flex-wrap:wrap}
 #confetti{position:fixed;inset:0;pointer-events:none;z-index:50}
 .sound{position:fixed;right:14px;bottom:14px;z-index:40;border:none;background:#fff;border-radius:50%;width:48px;height:48px;font-size:22px;box-shadow:0 6px 18px rgba(30,42,74,.15);cursor:pointer}
-@media (max-width:520px){.card{padding:18px}.qcard{padding:22px 14px}.ans{width:120px}.bar{grid-template-columns:36px 1fr 56px}}
+@media (max-width:520px){.card{padding:16px}.qcard{padding:20px 12px}.ans{width:120px}.bar{grid-template-columns:36px 1fr 56px}.mascot{font-size:52px}.hero .animals{font-size:34px}}
 </style>
 </head>
 <body>
+<div class="bg" id="bg"></div>
 <canvas id="confetti"></canvas>
 <button class="sound" id="soundBtn" title="Звук">🔊</button>
 <div class="wrap">
 
-<!-- START -->
 <section class="screen active" id="scrStart">
   <div class="hero">
-    <div class="big">🚀</div>
+    <div class="animals"><span>🦊</span><span>🐻</span><span>🐰</span><span>🦉</span></div>
     <div>
-      <h1>Математический полёт</h1>
-      <p class="sub">Тренажёр по математике для 3 класса (числа до 100): решай примеры и задачи, лети к планете!</p>
+      <h1>Лесная математика</h1>
+      <p class="sub">Тренажёр для 3 класса по программе «Школа России». Выбери четверть, решай задания и собирай кубки!</p>
     </div>
   </div>
-
   <div class="card">
     <label class="lbl" for="nameInp">Как тебя зовут?</label>
-    <input class="name" id="nameInp" maxlength="20" placeholder="Например, Маша">
+    <input class="name" id="nameInp" maxlength="20" placeholder="Например, Вика">
   </div>
-
   <div class="card">
-    <h2>Что будем тренировать?</h2>
+    <h2>Какую четверть проходим?</h2>
+    <div class="quarters" id="qList"></div>
+  </div>
+  <div class="card">
+    <h2>Темы четверти</h2>
     <div class="topics" id="topicList"></div>
     <div class="row mt">
-      <button class="linkbtn" id="selAll">Выбрать всё</button>
-      <button class="linkbtn" id="selNone">Снять всё</button>
+      <button class="linkbtn" id="selAll">Выбрать все</button>
+      <button class="linkbtn" id="selNone">Снять все</button>
     </div>
+    <div class="note" id="qNote" style="display:none"></div>
   </div>
-
   <div class="card">
     <h2>Сколько заданий?</h2>
     <div class="row" id="countRow"></div>
   </div>
-
   <div class="center mt">
-    <button class="btn green" id="startBtn" style="font-size:22px;padding:16px 40px">Поехали! 🚀</button>
+    <button class="btn green" id="startBtn" style="font-size:22px;padding:16px 40px">В путь! 🐾</button>
     <p class="small" id="startErr" style="color:var(--red);min-height:20px"></p>
   </div>
-
+  <div class="card" id="shelfCard" style="display:none">
+    <h2>🏆 Мои кубки</h2>
+    <div class="shelf" id="shelf"></div>
+  </div>
   <div class="card" id="histCard" style="display:none">
     <h2>Последние тренировки</h2>
     <div class="hist" id="histList"></div>
   </div>
 </section>
 
-<!-- GAME -->
 <section class="screen" id="scrGame">
   <div class="topbar">
     <div class="chips">
       <div class="chip" id="cProg">Задание 1 из 10</div>
-      <div class="chip">⭐ <span id="cStars">0</span></div>
+      <div class="chip" id="cStarsChip">⭐ <span id="cStars">0</span></div>
       <div class="chip" id="cCombo" style="display:none">🔥 <span></span></div>
     </div>
-    <div class="chips">
-      <div class="chip timer">⏱ <span id="cTimer">0:00</span></div>
-    </div>
+    <div class="chips"><div class="chip timer">⏱ <span id="cTimer">0:00</span></div></div>
   </div>
-  <div class="track"><div class="fill" id="tFill"></div><div class="rocket" id="tRocket">🚀</div><div class="planet">🪐</div></div>
+  <div class="track"><div class="runner" id="tRunner">🦊</div><div class="goal" id="tGoal">🍪</div></div>
   <div class="dots" id="dots"></div>
-
-  <div class="card qcard">
+  <div class="mrow">
+    <div class="mascot" id="mascot">🦊</div>
+    <div class="bubble" id="bubble">Привет!</div>
+  </div>
+  <div class="card qcard" id="qcard">
     <div class="tag" id="qTag"></div>
     <div id="qFig"></div>
     <div class="qtext" id="qText"></div>
@@ -183,34 +223,31 @@ tr.bad td{background:#fff7f7}
     </div>
     <button class="linkbtn mt" id="skipBtn">Не знаю, покажи ответ</button>
   </div>
-  <p class="small center">Подсказка: можно нажимать <b>Enter</b> вместо кнопок.</p>
+  <p class="small center">Можно нажимать <b>Enter</b> вместо кнопок.</p>
 </section>
 
-<!-- RESULTS -->
 <section class="screen" id="scrResult">
   <div class="card center">
-    <div class="medal" id="rMedal">🏆</div>
-    <h1 id="rTitle">Отлично!</h1>
+    <div class="podium"><div class="rays" id="rRays"></div><div class="trophy" id="rTrophy"></div></div>
+    <div class="party" id="rParty"></div>
+    <h1 id="rTitle"></h1>
     <p class="sub" id="rSub"></p>
     <div class="tiles mt" id="rTiles"></div>
     <div class="actions">
       <button class="btn green" id="fixBtn">Исправить ошибки</button>
       <button class="btn" id="againBtn">Ещё раз</button>
-      <button class="btn ghost" id="menuBtn">Выбрать темы</button>
+      <button class="btn ghost" id="menuBtn">Выбрать четверть</button>
     </div>
   </div>
-
   <div class="card">
     <h2>Время на каждое задание</h2>
-    <div class="legend"><span><i style="background:#22c55e"></i>верно</span><span><i style="background:#f87171"></i>ошибка</span></div>
+    <div class="legend"><span><i style="background:#86efac"></i>верно</span><span><i style="background:#fca5a5"></i>ошибка</span></div>
     <div class="bars" id="rBars"></div>
   </div>
-
   <div class="card">
     <h2>По темам</h2>
     <div class="tbl-wrap"><table id="rTopics"></table></div>
   </div>
-
   <div class="card">
     <h2>Все задания подробно</h2>
     <div class="tbl-wrap"><table id="rTable"></table></div>
@@ -219,243 +256,403 @@ tr.bad td{background:#fff7f7}
 </div>
 
 <script>
-/* ---------- helpers ---------- */
+/* ================= helpers ================= */
 const $=id=>document.getElementById(id);
 const rnd=(a,b)=>Math.floor(Math.random()*(b-a+1))+a;
 const pick=a=>a[Math.floor(Math.random()*a.length)];
 const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 function plural(n,one,few,many){const m10=n%10,m100=n%100;if(m10===1&&m100!==11)return one;if(m10>=2&&m10<=4&&(m100<12||m100>14))return few;return many}
-const BOYS=[{n:'Петя',g:'Пети'},{n:'Миша',g:'Миши'},{n:'Коля',g:'Коли'},{n:'Дима',g:'Димы'},{n:'Ваня',g:'Вани'}];
-const GIRLS=[{n:'Маша',g:'Маши'},{n:'Аня',g:'Ани'},{n:'Катя',g:'Кати'},{n:'Оля',g:'Оли'},{n:'Лена',g:'Лены'}];
+const raz=k=>plural(k,'раз','раза','раз');
+const fr=(a,b)=>`<span class="fr"><span>${a}</span><span>${b}</span></span>`;
 function fmtSec(s){s=Math.max(0,s);if(s<60)return (s<10?s.toFixed(1).replace('.',','):Math.round(s))+' с';const m=Math.floor(s/60),r=Math.round(s%60);return m+' мин '+String(r).padStart(2,'0')+' с'}
-function fmtClock(s){s=Math.floor(s);return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')}
+const fmtClock=s=>{s=Math.floor(s);return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')};
+function roman(n){let s='';for(const [v,r] of [[10,'X'],[9,'IX'],[5,'V'],[4,'IV'],[1,'I']])while(n>=v){s+=r;n-=v}return s}
+const ANIMALS=[{n:'Зайчик',m:1},{n:'Белочка',m:0},{n:'Ёжик',m:1},{n:'Лисичка',m:0},{n:'Медвежонок',m:1},{n:'Мышка',m:0},{n:'Совёнок',m:1},{n:'Енотик',m:1}];
+const vb=(a,m,f)=>a.m?m:f;
+const two=()=>{const a=pick(ANIMALS);let b;do{b=pick(ANIMALS)}while(b===a);return [a,b]};
 
-/* ---------- task generators ---------- */
-const expr=(text,ans,extra={})=>Object.assign({kind:'expr',text,answers:[ans],fields:[{pre:'',post:''}]},extra);
+const T=(text,ans,o={})=>Object.assign({kind:'expr',text,answers:[ans],fields:[{pre:'',post:''}]},o);
+const W=(text,ans,post='',o={})=>Object.assign({kind:'word',text,answers:[ans],fields:[{pre:'Ответ:',post}]},o);
+const E=(text,x)=>({kind:'eq',text,answers:[x],fields:[{pre:'x =',post:''}],hint:'Реши уравнение'});
+const C=(text,options,idx,hint='Выбери правильный ответ')=>({kind:'choice',text,options,answers:[idx],hint});
+const U=(text,ans,post,hint='Переведи единицы')=>({kind:'unit',text,answers:[ans],fields:[{pre:'',post}],hint});
+const CMP=['<','>','='];
+const cmpIdx=(L,R)=>L<R?0:L>R?1:2;
 
-function genAdd(){
-  const t=rnd(0,2);
-  if(t===0){const a=rnd(15,79),b=rnd(12,99-a);return expr(`${a} + ${b}`,a+b)}
-  if(t===1){const a=rnd(2,9),b=rnd(Math.max(11,10-a+10),99-a);return expr(`${b} + ${a}`,a+b)}
-  const a=rnd(10,40),b=rnd(10,40),c=rnd(10,99-a-b);return expr(`${a} + ${b} + ${c}`,a+b+c)
-}
-function genSub(){
-  const t=rnd(0,2);
-  if(t===0){const a=rnd(30,99),b=rnd(11,a-5);return expr(`${a} − ${b}`,a-b)}
-  if(t===1){const a=rnd(3,9)*10,b=rnd(11,a-1);return expr(`${a} − ${b}`,a-b)}
-  const a=rnd(50,99),b=rnd(10,20),c=rnd(5,a-b-5);return expr(`${a} − ${b} − ${c}`,a-b-c)
-}
-function genMulTable(){const a=rnd(2,9),b=rnd(2,9);return expr(`${a} · ${b}`,a*b)}
-function genDivTable(){const d=rnd(2,9),q=rnd(2,9);return expr(`${d*q} : ${d}`,q)}
-function genOut(){
-  const t=rnd(0,3);
-  if(t===0){const a=rnd(11,33),b=rnd(2,Math.floor(99/a));return expr(`${a} · ${b}`,a*b)}
-  if(t===1){const a=rnd(1,4)*10,b=rnd(2,Math.floor(99/a));return expr(`${a} · ${b}`,a*b)}
-  if(t===2){const q=rnd(11,33),d=rnd(2,Math.floor(99/q));return expr(`${q*d} : ${d}`,q)}
-  const d=rnd(11,33),q=rnd(2,Math.floor(99/d));return expr(`${d*q} : ${d}`,q)
-}
-function genRem(){
-  const d=rnd(2,9),q=rnd(1,9),r=rnd(1,d-1),a=d*q+r;
-  return {kind:'expr',text:`${a} : ${d}`,answers:[q,r],fields:[{pre:'',post:''},{pre:'ост.',post:''}],hint:'Запиши частное и остаток'}
-}
-function genOrder(){
-  const t=rnd(0,4);let a,b,c,q,s,p;
+function tabTask(ms){const a=pick(ms),b=rnd(2,9),t=rnd(0,3);
+  if(t===0)return T(`${a} · ${b}`,a*b); if(t===1)return T(`${b} · ${a}`,a*b);
+  if(t===2)return T(`${a*b} : ${a}`,b); return T(`${a*b} : ${b}`,a)}
+function orderTask(ms){const a=pick(ms),b=rnd(2,9),p=a*b,t=rnd(0,4);let c,d;
   switch(t){
-    case 0:b=rnd(2,9);c=rnd(2,9);a=rnd(5,99-b*c);return expr(`${a} + ${b} · ${c}`,a+b*c);
-    case 1:s=rnd(3,9);a=rnd(1,s-1);b=s-a;c=rnd(2,9);return expr(`(${a} + ${b}) · ${c}`,s*c);
-    case 2:c=rnd(2,9);q=rnd(2,9);b=c*q;a=rnd(q+1,99);return expr(`${a} − ${b} : ${c}`,a-q);
-    case 3:a=rnd(2,9);b=rnd(2,9);p=a*b;c=rnd(1,p-1);return expr(`${a} · ${b} − ${c}`,p-c);
-    default:c=rnd(2,9);q=rnd(2,9);s=c*q;b=rnd(5,Math.min(60,99-s));a=s+b;return expr(`(${a} − ${b}) : ${c}`,q);
-  }
-}
-function genEq(){
-  const t=rnd(0,5);let x,a,text;
-  switch(t){
-    case 0:x=rnd(10,80);a=rnd(5,99-x);text=`x + ${a} = ${x+a}`;break;
-    case 1:x=rnd(20,99);a=rnd(5,x-1);text=`x − ${a} = ${x-a}`;break;
-    case 2:a=rnd(20,99);x=rnd(5,a-1);text=`${a} − x = ${a-x}`;break;
-    case 3:x=rnd(2,9);a=rnd(2,9);text=`x · ${a} = ${x*a}`;break;
-    case 4:x=rnd(2,9)*(a=rnd(2,9));text=`x : ${a} = ${x/a}`;break;
-    default:a=rnd(2,9);x=rnd(2,9);text=`${a*x} : x = ${a}`;
-  }
-  return {kind:'eq',text,answers:[x],fields:[{pre:'x =',post:''}],hint:'Реши уравнение'}
-}
-function genUnits(){
-  const t=rnd(0,6);let a,b;
-  const one=(text,ans,post)=>({kind:'unit',text,answers:[ans],fields:[{pre:'',post}],hint:'Переведи единицы'});
-  switch(t){
-    case 0:a=rnd(1,9);b=rnd(1,9);return one(`${a} дм ${b} см = ? см`,a*10+b,'см');
-    case 1:a=rnd(2,9);return one(`${a} м = ? дм`,a*10,'дм');
-    case 2:a=rnd(1,9);b=rnd(1,9);return one(`${a} м ${b} дм = ? дм`,a*10+b,'дм');
-    case 3:a=rnd(2,4);return one(`${a} сут = ? ч`,a*24,'ч');
-    case 4:a=rnd(2,9);b=rnd(1,9);return one(`${a} см ${b} мм = ? мм`,a*10+b,'мм');
-    case 5:b=rnd(5,39);return one(`1 ч ${b} мин = ? мин`,60+b,'мин');
-    default:a=rnd(11,99);if(a%10===0)a++;
-      return {kind:'unit',text:`${a} см = ? дм ? см`,answers:[Math.floor(a/10),a%10],fields:[{pre:'',post:'дм'},{pre:'',post:'см'}],hint:'Переведи единицы'};
-  }
-}
-function genGeo(){
-  const t=rnd(0,5);let a,b;
-  const g=(text,ans,unit,fig)=>({kind:'word',text,answers:[ans],fields:[{pre:'Ответ:',post:unit}],fig});
-  switch(t){
-    case 0:a=rnd(3,15);do{b=rnd(2,12)}while(b===a);
-      return g(`Найди периметр прямоугольника со сторонами ${a} см и ${b} см.`,2*(a+b),'см',{w:a,h:b,lw:a+' см',lh:b+' см'});
-    case 1:a=rnd(3,9);do{b=rnd(2,9)}while(b===a);
-      return g(`Найди площадь прямоугольника со сторонами ${a} см и ${b} см.`,a*b,'см²',{w:a,h:b,lw:a+' см',lh:b+' см'});
-    case 2:a=rnd(2,24);return g(`Найди периметр квадрата со стороной ${a} см.`,4*a,'см',{w:1,h:1,lw:a+' см',lh:a+' см'});
-    case 3:a=rnd(2,9);return g(`Найди площадь квадрата со стороной ${a} см.`,a*a,'см²',{w:1,h:1,lw:a+' см',lh:a+' см'});
-    case 4:a=rnd(2,20);return g(`Периметр квадрата ${4*a} см. Найди длину его стороны.`,a,'см',{w:1,h:1,lw:'?',lh:'?'});
-    default:a=rnd(3,9);do{b=rnd(2,9)}while(b===a);
-      return g(`Площадь прямоугольника ${a*b} см², его длина ${a} см. Найди ширину.`,b,'см',{w:a,h:b,lw:a+' см',lh:'?'});
-  }
-}
-const WORD=[
-  ()=>{const a=rnd(12,40),b=rnd(3,15);return [`В первой корзине ${a} ${plural(a,'яблоко','яблока','яблок')}, а во второй — на ${b} ${plural(b,'яблоко','яблока','яблок')} больше. Сколько яблок в двух корзинах вместе?`,a+a+b,'шт.']},
-  ()=>{const c=rnd(4,19),n=rnd(2,5);return [`Тетрадь стоит ${c} руб. Сколько рублей нужно заплатить за ${n} ${plural(n,'тетрадь','тетради','тетрадей')}?`,c*n,'руб.']},
-  ()=>{const k=rnd(2,9),q=rnd(3,9),N=k*q;return [`${N} ${plural(N,'конфету','конфеты','конфет')} разложили поровну в ${k} ${plural(k,'коробку','коробки','коробок')}. Сколько конфет в каждой коробке?`,q,'шт.']},
-  ()=>{const a=rnd(24,32),b=rnd(10,a-8);return [`В классе ${a} ${plural(a,'ученик','ученика','учеников')}. Из них ${b} ${plural(b,'мальчик','мальчика','мальчиков')}. Сколько девочек в классе?`,a-b,'']},
-  ()=>{const g=pick(GIRLS),bo=pick(BOYS),a=rnd(3,12),k=rnd(2,5);return [`${g.n} нашла ${a} ${plural(a,'гриб','гриба','грибов')}, а ${bo.n} — в ${k} ${plural(k,'раз','раза','раз')} больше. Сколько грибов нашёл ${bo.n}?`,a*k,'шт.']},
-  ()=>{const a=rnd(20,45),b=rnd(2,10),c=rnd(2,10);return [`В автобусе было ${a} ${plural(a,'человек','человека','человек')}. На остановке вышли ${b} ${plural(b,'человек','человека','человек')}, а вошли ${c}. Сколько человек стало в автобусе?`,a-b+c,'']},
-  ()=>{const k=rnd(2,6),n=rnd(6,12),m=rnd(3,k*n-2);return [`Купили ${k} ${plural(k,'пачку','пачки','пачек')} карандашей, по ${n} карандашей в каждой. Раздали ${m} ${plural(m,'карандаш','карандаша','карандашей')}. Сколько карандашей осталось?`,k*n-m,'шт.']},
-  ()=>{const k=rnd(2,9),q=rnd(3,11);return [`Ленту длиной ${k*q} см разрезали на ${k} ${plural(k,'равную часть','равные части','равных частей')}. Какой длины каждая часть?`,q,'см']},
-  ()=>{const k=rnd(3,6),q=rnd(3,9),m=rnd(2,k-1),N=k*q;return [`На ${k} полках поровну стоят ${N} ${plural(N,'книга','книги','книг')}. Сколько книг на ${m} таких полках?`,q*m,'шт.']},
-  ()=>{const a=rnd(8,25),b=rnd(8,25),c=rnd(5,a+b-3);return [`Бабушка испекла ${a} ${plural(a,'пирожок','пирожка','пирожков')} с капустой и ${b} с яблоками. Внуки съели ${c} ${plural(c,'пирожок','пирожка','пирожков')}. Сколько пирожков осталось?`,a+b-c,'шт.']},
-  ()=>{const p=rnd(5,20),d=rnd(3,25);return [`Карандаш стоит ${p} руб., а ручка — на ${d} руб. дороже. Сколько стоят карандаш и ручка вместе?`,p+p+d,'руб.']},
-  ()=>{const b=rnd(12,60),a=rnd(b+5,99);return [`Велосипедист в первый день проехал ${a} км, а во второй — ${b} км. На сколько километров больше он проехал в первый день?`,a-b,'км']},
-  ()=>{const k=rnd(2,5),w=rnd(3,9),m=rnd(2,9);return [`Масса ${k} одинаковых ящиков — ${k*w} кг. Какова масса ${m} таких ящиков?`,w*m,'кг']},
-  ()=>{const ch=pick([...GIRLS.map(x=>({...x,f:1})),...BOYS.map(x=>({...x,f:0}))]);const M=rnd(50,99);let k,p;do{k=rnd(2,5);p=rnd(5,18)}while(k*p>=M);
-    return [`У ${ch.g} было ${M} руб. ${ch.n} ${ch.f?'купила':'купил'} ${k} ${plural(k,'булочку','булочки','булочек')} по ${p} руб. Сколько денег осталось?`,M-k*p,'руб.']},
-  ()=>{const a=rnd(3,9),b=rnd(2,9);return [`В саду ${a} ${plural(a,'ряд','ряда','рядов')} яблонь, по ${b} ${plural(b,'яблоне','яблони','яблонь')} в каждом ряду. Сколько всего яблонь в саду?`,a*b,'шт.']},
+    case 0:c=rnd(5,Math.min(60,99-p));return T(`${c} + ${a} · ${b}`,c+p,{hint:'Помни порядок действий'});
+    case 1:c=rnd(p+1,99);return T(`${c} − ${a} · ${b}`,c-p,{hint:'Помни порядок действий'});
+    case 2:if(a<3)return orderTask(ms);c=rnd(1,a-1);return T(`(${c} + ${a-c}) · ${b}`,p,{hint:'Сначала действие в скобках'});
+    case 3:c=rnd(5,60);return T(`${p} : ${a} + ${c}`,b+c,{hint:'Помни порядок действий'});
+    default:d=rnd(1,Math.min(40,99-p));return T(`(${p+d} − ${d}) : ${a}`,b,{hint:'Сначала действие в скобках'});
+  }}
+
+/* ================= 1 четверть ================= */
+function q1_addsub(){const t=rnd(0,3);let a,b,c;
+  if(t===0){a=rnd(15,79);b=rnd(12,99-a);return T(`${a} + ${b}`,a+b)}
+  if(t===1){a=rnd(30,99);b=rnd(11,a-5);return T(`${a} − ${b}`,a-b)}
+  if(t===2){a=rnd(3,9)*10;b=rnd(11,a-1);return T(`${a} − ${b}`,a-b)}
+  a=rnd(20,60);b=rnd(10,99-a);c=rnd(5,a+b-5);return T(`${a} + ${b} − ${c}`,a+b-c)}
+function q1_eq(){const t=rnd(0,3);let x,a;
+  if(t===0){x=rnd(10,80);a=rnd(5,99-x);return E(`x + ${a} = ${x+a}`,x)}
+  if(t===1){x=rnd(10,80);a=rnd(5,99-x);return E(`${a} + x = ${x+a}`,x)}
+  if(t===2){x=rnd(20,99);a=rnd(5,x-1);return E(`x − ${a} = ${x-a}`,x)}
+  a=rnd(20,99);x=rnd(5,a-1);return E(`${a} − x = ${a-x}`,x)}
+function q1_var(){const L=pick(['a','b','c','k','m']),t=rnd(0,2),h={hint:'Подставь число вместо буквы'};let v,n;
+  if(t===0){v=rnd(10,60);n=rnd(5,99-v);return W(`Найди значение выражения ${n} + ${L}, если ${L} = ${v}.`,n+v,'',h)}
+  if(t===1){n=rnd(40,99);v=rnd(5,n-5);return W(`Найди значение выражения ${n} − ${L}, если ${L} = ${v}.`,n-v,'',h)}
+  v=rnd(2,9);n=rnd(2,6);return W(`Найди значение выражения ${L} · ${n}, если ${L} = ${v}.`,v*n,'',h)}
+function q1_times(){const k=rnd(2,6),n=rnd(2,9),t=rnd(0,4),h={hint:'Увеличить, уменьшить, сравнить'};
+  if(t===0)return W(`Увеличь число ${n} в ${k} ${raz(k)}.`,n*k,'',h);
+  if(t===1)return W(`Уменьши число ${n*k} в ${k} ${raz(k)}.`,n,'',h);
+  if(t===2)return W(`Во сколько раз число ${n*k} больше, чем ${n}?`,k,'',h);
+  if(t===3)return W(`На сколько число ${n*k} больше, чем ${n}?`,n*k-n,'',h);
+  return W(`Во сколько раз число ${k} меньше, чем ${n*k}?`,n,'',h)}
+function q1_even(){const n=rnd(11,99);return C(`Число ${n} — чётное или нечётное?`,['чётное','нечётное'],n%2)}
+const Q1W=[
+  ()=>{const p=rnd(2,6),n=rnd(2,9);return W(`Цена тетради ${p} руб. Купили ${n} ${plural(n,'тетрадь','тетради','тетрадей')}. Сколько стоит покупка?`,p*n,'руб.')},
+  ()=>{const p=rnd(2,6),n=rnd(2,9);return W(`За несколько одинаковых ручек заплатили ${p*n} руб. Цена одной ручки ${p} руб. Сколько ручек купили?`,n,'шт.')},
+  ()=>{const p=rnd(2,9),n=rnd(2,6);return W(`${n} ${plural(n,'','одинаковых альбома стоят','одинаковых альбомов стоят')} ${p*n} руб. Сколько стоит один альбом?`,p,'руб.')},
+  ()=>{const w=rnd(2,6),k=rnd(2,5),m=rnd(2,9);return W(`В ${k} одинаковых мешках ${k*w} кг картофеля. Сколько килограммов картофеля в ${m} таких мешках?`,w*m,'кг')},
+  ()=>{const [a,b]=two(),n=rnd(2,9),k=rnd(2,6);return W(`${a.n} ${vb(a,'нашёл','нашла')} ${n} ${plural(n,'гриб','гриба','грибов')}, а ${b.n} — в ${k} ${raz(k)} больше. Сколько грибов ${vb(b,'нашёл','нашла')} ${b.n}?`,n*k,'шт.')},
+  ()=>{const [a,b]=two(),n=rnd(2,9),k=rnd(2,6);return W(`${a.n} ${vb(a,'собрал','собрала')} ${n*k} ${plural(n*k,'орех','ореха','орехов')}, а ${b.n} — в ${k} ${raz(k)} меньше. Сколько орехов ${vb(b,'собрал','собрала')} ${b.n}?`,n,'шт.')},
+  ()=>{const n=rnd(2,9),k=rnd(2,6);return W(`У Медвежонка ${n*k} ${plural(n*k,'бочонок','бочонка','бочонков')} мёда, а у Лисички ${n}. Во сколько раз больше бочонков у Медвежонка?`,k,'')},
+  ()=>{const k=rnd(2,6),n=rnd(3,9),c=rnd(3,20);return W(`Купили ${k} ${plural(k,'пачку','пачки','пачек')} по ${n} карандашей и ещё ${c} ${plural(c,'карандаш','карандаша','карандашей')}. Сколько всего карандашей купили?`,k*n+c,'шт.')},
+  ()=>{const k=rnd(2,6),n=rnd(2,9);return W(`Зайчик разложил ${k*n} ${plural(k*n,'морковку','морковки','морковок')} поровну в ${k} ${plural(k,'корзинку','корзинки','корзинок')}. Сколько морковок в каждой корзинке?`,n,'шт.')},
 ];
-function genWord(){const [text,ans,unit]=pick(WORD)();return {kind:'word',text,answers:[ans],fields:[{pre:'Ответ:',post:unit}]}}
+const q1_word=()=>pick(Q1W)();
 
-const TOPICS=[
-  {id:'add',name:'Сложение',icon:'➕',gen:genAdd},
-  {id:'sub',name:'Вычитание',icon:'➖',gen:genSub},
-  {id:'mt',name:'Таблица умножения',icon:'✖️',gen:genMulTable},
-  {id:'dt',name:'Табличное деление',icon:'➗',gen:genDivTable},
-  {id:'out',name:'Внетабличное × и :',icon:'🧮',gen:genOut},
-  {id:'rem',name:'Деление с остатком',icon:'🍬',gen:genRem},
-  {id:'ord',name:'Порядок действий',icon:'🔢',gen:genOrder},
-  {id:'eq',name:'Уравнения',icon:'❓',gen:genEq},
-  {id:'un',name:'Величины',icon:'📏',gen:genUnits},
-  {id:'geo',name:'Периметр и площадь',icon:'📐',gen:genGeo},
-  {id:'word',name:'Текстовые задачи',icon:'📖',gen:genWord},
+/* ================= 2 четверть ================= */
+function q2_tabAll(){const a=rnd(2,9),t=rnd(0,9);
+  if(t===0)return T(`${a} · 1`,a); if(t===1)return T(`${a} · 0`,0); if(t===2)return T(`0 : ${a}`,0);
+  if(t===3)return T(`${a} : ${a}`,1); if(t===4)return T(`${a} : 1`,a); return tabTask([2,3,4,5,6,7,8,9])}
+function q2_area(){const t=rnd(0,4);let a,b;
+  switch(t){
+    case 0:a=rnd(3,9);do{b=rnd(2,9)}while(b===a);return W(`Найди площадь прямоугольника со сторонами ${a} см и ${b} см.`,a*b,'см²',{fig:{w:a,h:b,lw:a+' см',lh:b+' см'}});
+    case 1:a=rnd(2,9);return W(`Найди площадь квадрата со стороной ${a} см.`,a*a,'см²',{fig:{w:1,h:1,lw:a+' см',lh:a+' см'}});
+    case 2:a=rnd(3,9);do{b=rnd(2,9)}while(b===a);return W(`Площадь прямоугольника ${a*b} см², его длина ${a} см. Найди ширину.`,b,'см',{fig:{w:a,h:b,lw:a+' см',lh:'?'}});
+    case 3:a=rnd(2,9);return W(`Площадь квадрата ${a*a} см². Найди длину его стороны.`,a,'см',{fig:{w:1,h:1,lw:'?',lh:'?'}});
+    default:a=rnd(3,15);do{b=rnd(2,12)}while(b===a);return W(`Найди периметр прямоугольника со сторонами ${a} см и ${b} см.`,2*(a+b),'см',{fig:{w:a,h:b,lw:a+' см',lh:b+' см'}});
+  }}
+function q2_frac(){const k=rnd(2,9),q=rnd(2,9),t=rnd(0,3),h={hint:'Доли'};
+  if(t===0)return W(`Найди 1/${k} от числа ${k*q}.`,q,'',{...h,html:`Найди ${fr(1,k)} от числа ${k*q}.`});
+  if(t===1)return W(`1/${k} числа равна ${q}. Найди всё число.`,k*q,'',{...h,html:`${fr(1,k)} числа равна ${q}. Найди всё число.`});
+  if(t===2){const a=pick(ANIMALS),N=k*q,s=`В корзинке было ${N} ${plural(N,'ягода','ягоды','ягод')}. ${a.n} ${vb(a,'съел','съела')} `,e=` всех ягод. Сколько ягод ${vb(a,'съел','съела')} ${a.n}?`;
+    return W(s+`1/${k}`+e,q,'шт.',{...h,html:s+fr(1,k)+e})}
+  const s=`Длина ленты ${k*q} см. Отрезали `,e=` ленты. Сколько сантиметров отрезали?`;return W(s+`1/${k}`+e,q,'см',{...h,html:s+fr(1,k)+e})}
+function q2_circle(){const r=rnd(2,20),h={hint:'Радиус и диаметр'};
+  return rnd(0,1)?W(`Радиус окружности ${r} см. Чему равен её диаметр?`,2*r,'см',h):W(`Диаметр круга ${2*r} см. Чему равен его радиус?`,r,'см',h)}
+const MONTHS=[['январе',31],['марте',31],['апреле',30],['мае',31],['июне',30],['июле',31],['августе',31],['сентябре',30],['октябре',31],['ноябре',30],['декабре',31]];
+function q2_time(){const t=rnd(0,6);let a;
+  switch(t){
+    case 0:return U('1 год = ? мес.',12,'мес.');
+    case 1:a=rnd(2,4);return U(`${a} сут. = ? ч`,a*24,'ч');
+    case 2:a=rnd(2,9);return U(`${a} нед. = ? дн.`,a*7,'дн.');
+    case 3:a=rnd(2,8);return U(`${a} ${plural(a,'год','года','лет')} = ? мес.`,a*12,'мес.');
+    case 4:return U('1 сут. = ? ч',24,'ч');
+    case 5:return U('1 ч = ? мин',60,'мин');
+    default:{const [m,d]=pick(MONTHS);return W(`Сколько дней в ${m}?`,d,'дн.',{hint:'Единицы времени'})}
+  }}
+function q2_cmp(){const h='Сравни: поставь знак',t=rnd(0,4),a=rnd(2,9);
+  if(t===0)return C(`${a} · 1   □   ${a} : 1`,CMP,2,h);
+  if(t===1)return C(`${a} · 0   □   0 : ${a}`,CMP,2,h);
+  const b=rnd(2,9);let c,d;do{c=rnd(2,9);d=rnd(2,9)}while(Math.abs(c*d-a*b)>10||(c===a&&d===b));
+  return C(`${a} · ${b}   □   ${c} · ${d}`,CMP,cmpIdx(a*b,c*d),h)}
+const Q2W=[
+  ()=>{const k=rnd(3,9),n=rnd(7,9);return W(`В ${k} коробках по ${n} цветных карандашей. Сколько всего карандашей?`,k*n,'шт.')},
+  ()=>{const k=rnd(2,9);return W(`У паука 8 ног. Сколько ног у ${k} пауков?`,8*k,'шт.')},
+  ()=>{const a=rnd(4,9);let b;do{b=rnd(3,9)}while(b===a);return W(`Огород имеет форму прямоугольника длиной ${a} м и шириной ${b} м. Найди площадь огорода.`,a*b,'м²')},
+  ()=>{const n=rnd(7,9),k=rnd(2,9);return W(`Белочка собрала ${n*k} ${plural(n*k,'шишку','шишки','шишек')} и разложила их поровну в ${n} дупел. Сколько шишек в каждом дупле?`,k,'шт.')},
+  ()=>{const k=rnd(2,9),q=rnd(3,9),s='В книге '+k*q+' '+plural(k*q,'страница','страницы','страниц')+'. Совёнок прочитал ',e=' книги. Сколько страниц прочитал Совёнок?';return W(s+`1/${k}`+e,q,'стр.',{html:s+fr(1,k)+e})},
+  ()=>{const k=rnd(2,9);return W(`Медвежонок спал ${k} ${plural(k,'неделю','недели','недель')}. Сколько это дней?`,7*k,'дн.')},
+  ()=>{const n=rnd(7,9),k=rnd(2,9);return W(`Ёжик принёс ${k} ${raz(k)} по ${n} яблок. Сколько яблок принёс Ёжик?`,n*k,'шт.')},
 ];
+const q2_word=()=>pick(Q2W)();
 
-/* ---------- storage (optional) ---------- */
+/* ================= 3 четверть ================= */
+function q3_round(){const t=rnd(0,3);let a,b,k;
+  if(t===0){a=rnd(1,4)*10;b=rnd(2,Math.floor(90/a));return T(`${a} · ${b}`,a*b)}
+  if(t===1){a=rnd(1,4)*10;b=rnd(2,Math.floor(90/a));return T(`${a*b} : ${b}`,a)}
+  if(t===2){b=rnd(1,4);k=rnd(2,Math.floor(9/b));return T(`${b*k*10} : ${b*10}`,k)}
+  a=rnd(1,4)*10;b=rnd(2,Math.floor(90/a));return T(`${b} · ${a}`,a*b)}
+function q3_mul(){const a=rnd(11,33),b=rnd(2,Math.floor(99/a));
+  if(rnd(0,2)===0&&a%10)return T(`(${a-a%10} + ${a%10}) · ${b}`,a*b,{hint:'Умножение суммы на число'});
+  return rnd(0,1)?T(`${a} · ${b}`,a*b):T(`${b} · ${a}`,a*b)}
+function q3_div(){
+  if(rnd(0,2)===0){const d=rnd(2,4),x=rnd(1,Math.floor(9/d)),y=rnd(1,Math.floor(9/d));return T(`(${d*x*10} + ${d*y}) : ${d}`,x*10+y,{hint:'Деление суммы на число'})}
+  const d=rnd(2,6),q=rnd(11,Math.floor(99/d));return T(`${q*d} : ${d}`,q)}
+function q3_div2(){const d=rnd(12,33),q=rnd(2,Math.floor(99/d));return T(`${d*q} : ${d}`,q,{hint:'Подбери частное'})}
+function q3_eq(){const t=rnd(0,3);let x,a,q;
+  if(t===0){x=rnd(11,33);a=rnd(2,Math.floor(99/x));return E(`x · ${a} = ${x*a}`,x)}
+  if(t===1){a=rnd(2,4);q=rnd(11,Math.floor(99/a));return E(`x : ${a} = ${q}`,a*q)}
+  if(t===2){a=rnd(2,4);x=rnd(11,Math.floor(99/a));return E(`${a*x} : x = ${a}`,x)}
+  x=rnd(11,33);a=rnd(2,Math.floor(99/x));return E(`${a} · x = ${x*a}`,x)}
+function q3_rem(){const d=rnd(2,9),q=rnd(1,9),r=rnd(1,d-1),a=d*q+r;
+  return {kind:'expr',text:`${a} : ${d}`,answers:[q,r],fields:[{pre:'',post:''},{pre:'ост.',post:''}],hint:'Запиши частное и остаток'}}
+function q3_remf(){const t=rnd(0,2),d=rnd(3,9),q=rnd(2,9),r=rnd(1,d-1);
+  if(t===0)return W(`Найди делимое, если делитель ${d}, частное ${q}, остаток ${r}.`,d*q+r,'',{hint:'Делимое = делитель · частное + остаток'});
+  if(t===1)return W(`Какой самый большой остаток может получиться при делении на ${d}?`,d-1,'',{hint:'Остаток меньше делителя'});
+  const ok=rnd(0,1),qq=ok?q:q-1,rr=ok?r:r+d;
+  return C(`Верно ли: ${d*q+r} : ${d} = ${qq} (ост. ${rr})?`,['Верно','Неверно'],ok?0:1,'Проверь деление с остатком')}
+function q3_chk(){const a=rnd(11,33),b=rnd(2,Math.floor(99/a)),ok=rnd(0,1);
+  if(rnd(0,1))return C(`Верно ли: ${a*b} : ${b} = ${ok?a:a+pick([-10,-2,-1,1,2,10])}?`,['Верно','Неверно'],ok?0:1,'Проверь умножением');
+  const p=a*b,o=pick([-10,-2,-1,1,2,10]),wp=p+o>99?p-Math.abs(o):p+o;return C(`Верно ли: ${a} · ${b} = ${ok?p:wp}?`,['Верно','Неверно'],ok?0:1,'Проверь делением')}
+const Q3W=[
+  ()=>{const d=rnd(2,4),q=rnd(11,Math.floor(99/d));return W(`Ёжик собрал ${q*d} ${plural(q*d,'гриб','гриба','грибов')} и разложил их поровну в ${d} ${plural(d,'корзинку','корзинки','корзинок')}. Сколько грибов в каждой корзинке?`,q,'шт.')},
+  ()=>{const k=rnd(2,6),n=rnd(11,Math.floor(99/k));return W(`В зоопарке ${k} ${plural(k,'вольер','вольера','вольеров')}, в каждом по ${n} ${plural(n,'обезьянка','обезьянки','обезьянок')}. Сколько всего обезьянок?`,k*n,'шт.')},
+  ()=>{const n=rnd(3,9),k=rnd(2,9),r=rnd(1,n-1),N=n*k+r;return {kind:'word',text:`У Мышки ${N} ${plural(N,'конфета','конфеты','конфет')}. Она раскладывает их в коробки по ${n} штук. Сколько коробок получится и сколько конфет останется?`,answers:[k,r],fields:[{pre:'',post:'кор.'},{pre:'и останется',post:'конф.'}],hint:'Деление с остатком'}},
+  ()=>{const k=rnd(2,3),n=rnd(11,Math.floor(99/k));return W(`Белочка запасла ${n*k} ${plural(n*k,'орех','ореха','орехов')}, а Мышка — в ${k} ${raz(k)} меньше. Сколько орехов запасла Мышка?`,n,'шт.')},
+  ()=>{const l=pick([12,13,14,15,16,18,19,23,24]),k=rnd(2,Math.floor(99/l));return W(`Из ${l*k} см ленты нарезали куски по ${l} см. Сколько кусков получилось?`,k,'шт.')},
+  ()=>{const n=rnd(11,19),k=rnd(2,5);return W(`Медвежонок съедает ${n} ложек мёда в день. Сколько ложек мёда он съест за ${k} ${plural(k,'день','дня','дней')}?`,n*k,'шт.')},
+];
+const q3_word=()=>pick(Q3W)();
+
+/* ================= 4 четверть ================= */
+function q4_num(){const t=rnd(0,6);let s,d,e,n;
+  switch(t){
+    case 0:s=rnd(1,9);d=rnd(0,9);e=rnd(0,9);return W(`Запиши число, в котором ${s} сот. ${d} дес. ${e} ед.`,s*100+d*10+e,'',{hint:'Нумерация'});
+    case 1:n=rnd(11,99)*10;return W(`Сколько всего десятков в числе ${n}?`,n/10,'',{hint:'Нумерация'});
+    case 2:n=rnd(100,999);return W(`Сколько сотен в числе ${n}?`,Math.floor(n/100),'',{hint:'Нумерация'});
+    case 3:n=rnd(2,9)*100;return W(`Какое число стоит перед числом ${n}?`,n-1,'',{hint:'Нумерация'});
+    case 4:n=rnd(1,9)*100-1;return W(`Какое число следует за числом ${n}?`,n+1,'',{hint:'Нумерация'});
+    case 5:s=rnd(1,9);d=rnd(1,9);e=rnd(1,9);return T(`${s*100} + ${d*10} + ${e}`,s*100+d*10+e,{hint:'Сумма разрядных слагаемых'});
+    default:n=rnd(11,99);return rnd(0,1)?W(`Увеличь число ${n} в 10 раз.`,n*10,'',{hint:'Нумерация'}):W(`Уменьши число ${n*10} в 10 раз.`,n,'',{hint:'Нумерация'});
+  }}
+function q4_cmp(){const h='Сравни: поставь знак';
+  if(rnd(0,1)){const a=rnd(110,989),s=String(a);let b=s[1]!==s[2]?Number(s[0]+s[2]+s[1]):a+pick([-1,1])*rnd(1,9);
+    return C(`${a}   □   ${b}`,CMP,cmpIdx(a,b),h)}
+  const P=[
+    ()=>{const g=rnd(1,9)*100;return ['1 кг',`${g} г`,1000,g]},
+    ()=>['1 кг','1000 г',1000,1000],
+    ()=>{const m=rnd(1,9),d=pick([m*10,m*10+rnd(1,5),m*10-rnd(1,5)]);return [`${m} м`,`${d} дм`,m*10,d]},
+    ()=>{const m=rnd(1,9),c=pick([m*100,m*100+rnd(1,9)*10,m*100-rnd(1,9)*10]);return [`${m} м`,`${c} см`,m*100,c]},
+    ()=>{const d=rnd(2,9),c=pick([d*10,d*10+rnd(1,8),d*10-rnd(1,8)]);return [`${d} дм`,`${c} см`,d*10,c]},
+  ];const [l,r,L,R]=pick(P)();return C(`${l}   □   ${r}`,CMP,cmpIdx(L,R),h)}
+function q4_oral(){const t=rnd(0,3);let a,b,h,tt;
+  if(t===0){a=rnd(1,8)*100;b=rnd(1,9-a/100)*100;return T(`${a} + ${b}`,a+b)}
+  if(t===1){a=rnd(2,9)*100;b=rnd(1,a/100-1)*100;return T(`${a} − ${b}`,a-b)}
+  if(t===2){h=rnd(1,8);tt=rnd(5,9);b=rnd(10-tt,9)*10;a=h*100+tt*10;return T(`${a} + ${b}`,a+b,{hint:'С переходом через сотню'})}
+  h=rnd(1,9);tt=rnd(0,7);b=rnd(tt+1,9)*10;a=h*100+tt*10;return T(`${a} − ${b}`,a-b,{hint:'С переходом через сотню'})}
+function q4_wr(){if(rnd(0,1)){const a=rnd(100,699),b=rnd(100,999-a);return T(`${a} + ${b}`,a+b,{hint:'Реши столбиком'})}
+  const a=rnd(0,2)?rnd(300,999):rnd(3,9)*100+rnd(0,9),b=rnd(100,a-50);return T(`${a} − ${b}`,a-b,{hint:'Реши столбиком'})}
+function q4_md(){const t=rnd(0,3);let a,b,q,d;
+  if(t===0){a=rnd(11,33)*10;b=rnd(2,Math.min(9,Math.floor(999/a)));return T(`${a} · ${b}`,a*b)}
+  if(t===1){q=rnd(11,33)*10;d=rnd(2,Math.min(9,Math.floor(999/q)));return T(`${q*d} : ${d}`,q)}
+  if(t===2){a=rnd(101,333);b=rnd(2,Math.floor(999/a));return T(`${a} · ${b}`,a*b,{hint:'Реши столбиком'})}
+  q=rnd(101,499);d=rnd(2,Math.floor(999/q));return T(`${q*d} : ${d}`,q,{hint:'Реши столбиком'})}
+function q4_mass(){const t=rnd(0,3);let a,b;
+  if(t===0)return U('1 кг = ? г',1000,'г');
+  if(t===1){a=rnd(1,9)*100;return U(`1 кг − ${a} г = ? г`,1000-a,'г')}
+  if(t===2){a=rnd(1,8)*100;b=rnd(1,9-a/100)*100;return U(`${a} г + ${b} г = ? г`,a+b,'г')}
+  a=rnd(100,450);return W(`Масса дыни ${a} г, а арбуз в 2 раза тяжелее. Какова масса арбуза?`,a*2,'г',{hint:'Граммы'})}
+function q4_rom(){const n=rnd(1,39);return W(`Запиши арабскими цифрами число ${roman(n)}.`,n,'',{hint:'Римские цифры'})}
+const Q4W=[
+  ()=>{const a=rnd(120,500),b=rnd(100,999-a);return W(`В зоопарке живут ${a} ${plural(a,'птица','птицы','птиц')} и ${b} ${plural(b,'зверь','зверя','зверей')}. Сколько всего животных в зоопарке?`,a+b,'шт.')},
+  ()=>{const a=rnd(4,9)*100,b=rnd(110,a-60);return W(`Белочка запасла на зиму ${a} орехов. За осень она съела ${b} ${plural(b,'орех','ореха','орехов')}. Сколько орехов осталось?`,a-b,'шт.')},
+  ()=>{const a=rnd(40,150),b=rnd(120,250);return W(`Масса медвежонка ${a} кг, а медведица тяжелее на ${b} кг. Какова масса медведицы?`,a+b,'кг')},
+  ()=>{const a=rnd(11,33)*10,k=rnd(2,Math.min(9,Math.floor(999/a)));return W(`Пчёлы за день приносят ${a} г мёда. Сколько граммов мёда они принесут за ${k} ${plural(k,'день','дня','дней')}?`,a*k,'г')},
+  ()=>{const q=rnd(11,33)*10,d=rnd(2,Math.min(9,Math.floor(999/q)));return W(`Ёжики собрали ${q*d} яблок и разложили их поровну в ${d} ${plural(d,'ящик','ящика','ящиков')}. Сколько яблок в каждом ящике?`,q,'шт.')},
+  ()=>{const a=rnd(150,450),b=rnd(100,999-a);return W(`Зайчик пробежал до речки ${a} м, а потом ещё ${b} м до опушки. Сколько всего метров пробежал Зайчик?`,a+b,'м')},
+];
+const q4_word=()=>pick(Q4W)();
+
+/* ================= четверти ================= */
+const QUARTERS=[
+  {id:'q1',name:'1 четверть',short:'1 четв.',an:'🦊',goal:'🍪',who:'Лисичка',desc:'Сложение и вычитание до 100, уравнения, таблица на 2–6',topics:[
+    {id:'q1a',name:'Сложение и вычитание',icon:'➕',gen:q1_addsub},
+    {id:'q1e',name:'Уравнения',icon:'❓',gen:q1_eq},
+    {id:'q1v',name:'Выражения с буквой',icon:'🔤',gen:q1_var},
+    {id:'q1t',name:'Умножение на 2 и 3',icon:'✖️',gen:()=>tabTask([2,3])},
+    {id:'q1u',name:'Умножение на 4, 5, 6',icon:'✖️',gen:()=>tabTask([4,5,6])},
+    {id:'q1o',name:'Порядок действий',icon:'🔢',gen:()=>orderTask([2,3,4,5,6])},
+    {id:'q1r',name:'Во сколько раз',icon:'🔁',gen:q1_times},
+    {id:'q1c',name:'Чётные и нечётные',icon:'🎲',gen:q1_even},
+    {id:'q1w',name:'Задачи',icon:'📖',gen:q1_word}]},
+  {id:'q2',name:'2 четверть',short:'2 четв.',an:'🐻',goal:'🍯',who:'Мишка',desc:'Таблица на 7–9, площадь, доли, окружность, время',topics:[
+    {id:'q2t',name:'Умножение на 7, 8, 9',icon:'✖️',gen:()=>tabTask([7,8,9])},
+    {id:'q2a',name:'Вся таблица, ×1 и ×0',icon:'🧮',gen:q2_tabAll},
+    {id:'q2s',name:'Площадь и периметр',icon:'📐',gen:q2_area},
+    {id:'q2f',name:'Доли',icon:'🍕',gen:q2_frac},
+    {id:'q2c',name:'Окружность и круг',icon:'⭕',gen:q2_circle},
+    {id:'q2m',name:'Единицы времени',icon:'⏰',gen:q2_time},
+    {id:'q2k',name:'Сравнение выражений',icon:'⚖️',gen:q2_cmp},
+    {id:'q2o',name:'Порядок действий',icon:'🔢',gen:()=>orderTask([6,7,8,9])},
+    {id:'q2w',name:'Задачи',icon:'📖',gen:q2_word}]},
+  {id:'q3',name:'3 четверть',short:'3 четв.',an:'🐰',goal:'🥕',who:'Зайчик',desc:'Внетабличное умножение и деление, деление с остатком',topics:[
+    {id:'q3r',name:'Круглые числа: 20·3, 80:20',icon:'🔟',gen:q3_round},
+    {id:'q3m',name:'Умножение двузначного',icon:'✖️',gen:q3_mul},
+    {id:'q3d',name:'Деление на однозначное',icon:'➗',gen:q3_div},
+    {id:'q3x',name:'Деление на двузначное',icon:'➗',gen:q3_div2},
+    {id:'q3e',name:'Уравнения',icon:'❓',gen:q3_eq},
+    {id:'q3o',name:'Деление с остатком',icon:'🍬',gen:q3_rem},
+    {id:'q3f',name:'Делимое, делитель, остаток',icon:'🧩',gen:q3_remf},
+    {id:'q3c',name:'Проверка действий',icon:'✅',gen:q3_chk},
+    {id:'q3w',name:'Задачи',icon:'📖',gen:q3_word}]},
+  {id:'q4',name:'4 четверть',short:'4 четв.',an:'🦉',goal:'🌙',who:'Совёнок',desc:'Числа до 1000, вычисления столбиком, граммы, римские цифры',note:'В 4 четверти по программе изучают числа до 1000, поэтому здесь есть трёхзначные числа.',topics:[
+    {id:'q4n',name:'Нумерация до 1000',icon:'🔢',gen:q4_num},
+    {id:'q4k',name:'Сравнение',icon:'⚖️',gen:q4_cmp},
+    {id:'q4o',name:'Устные вычисления',icon:'🗣️',gen:q4_oral},
+    {id:'q4p',name:'Сложение и вычитание столбиком',icon:'✍️',gen:q4_wr},
+    {id:'q4m',name:'Умножение и деление',icon:'✖️',gen:q4_md},
+    {id:'q4g',name:'Граммы и килограммы',icon:'🏋️',gen:q4_mass},
+    {id:'q4r',name:'Римские цифры',icon:'🏛️',gen:q4_rom},
+    {id:'q4w',name:'Задачи',icon:'📖',gen:q4_word}]},
+];
+QUARTERS.push({id:'y',name:'Весь год',short:'Год',an:'🐼',goal:'🎋',who:'Панда',desc:'Задания из всех четвертей вперемешку',note:'Здесь собраны темы всех четвертей, в том числе трёхзначные числа из 4 четверти.',topics:QUARTERS.flatMap(q=>q.topics)});
+
+/* ================= storage ================= */
 const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
 
-/* ---------- settings screen ---------- */
-let selected=new Set(store.get('m3_topics',TOPICS.map(t=>t.id)));
-let count=store.get('m3_count',10);
-function renderTopics(){
-  $('topicList').innerHTML='';
-  TOPICS.forEach(t=>{
-    const el=document.createElement('label');el.className='topic'+(selected.has(t.id)?' on':'');
-    el.innerHTML=`<input type="checkbox"><span class="ic">${t.icon}</span><span>${t.name}</span>`;
-    el.onclick=e=>{e.preventDefault();selected.has(t.id)?selected.delete(t.id):selected.add(t.id);renderTopics()};
-    $('topicList').appendChild(el);
-  });
-}
-function renderCount(){
-  $('countRow').innerHTML='';
-  [5,10,15,20].forEach(n=>{const b=document.createElement('button');b.className='pill'+(n===count?' on':'');b.textContent=n;b.onclick=()=>{count=n;renderCount()};$('countRow').appendChild(b)});
-}
-$('selAll').onclick=()=>{selected=new Set(TOPICS.map(t=>t.id));renderTopics()};
+/* ================= background animals ================= */
+(function(){const em=['🦊','🐻','🐰','🦉','🐼','🐿️','🦔','🐸','🐢','🐞','🦋','🐝','🍄','🌻'];
+  em.forEach(e=>{const s=document.createElement('span');s.textContent=e;s.style.left=rnd(0,95)+'%';s.style.fontSize=rnd(26,50)+'px';
+    s.style.animationDuration=rnd(20,38)+'s';s.style.animationDelay=-rnd(0,38)+'s';$('bg').appendChild(s)})})();
+
+/* ================= start screen ================= */
+let curQ=QUARTERS.find(q=>q.id===store.get('m3q_q','q1'))||QUARTERS[0];
+const loadSel=q=>new Set(store.get('m3q_sel_'+q.id,q.topics.map(t=>t.id)).filter(id=>q.topics.some(t=>t.id===id)));
+let selected=loadSel(curQ);
+let count=store.get('m3q_count',10);
+function renderQuarters(){$('qList').innerHTML='';
+  QUARTERS.forEach(q=>{const b=document.createElement('button');b.className='qbtn'+(q===curQ?' on':'');
+    b.innerHTML=`<span class="an">${q.an}</span><b>${q.name}</b><small>${q.desc}</small>`;
+    b.onclick=()=>{curQ=q;selected=loadSel(q);renderQuarters();renderTopics()};
+    $('qList').appendChild(b)})}
+function renderTopics(){$('topicList').innerHTML='';
+  curQ.topics.forEach(t=>{const el=document.createElement('div');el.className='topic'+(selected.has(t.id)?' on':'');
+    el.innerHTML=`<span class="ic">${t.icon}</span><span>${t.name}</span>`;
+    el.onclick=()=>{selected.has(t.id)?selected.delete(t.id):selected.add(t.id);renderTopics()};
+    $('topicList').appendChild(el)});
+  const n=$('qNote');if(curQ.note){n.style.display='';n.textContent='ℹ️ '+curQ.note}else n.style.display='none'}
+function renderCount(){$('countRow').innerHTML='';
+  [5,10,15,20].forEach(n=>{const b=document.createElement('button');b.className='pill'+(n===count?' on':'');b.textContent=n;b.onclick=()=>{count=n;renderCount()};$('countRow').appendChild(b)})}
+$('selAll').onclick=()=>{selected=new Set(curQ.topics.map(t=>t.id));renderTopics()};
 $('selNone').onclick=()=>{selected.clear();renderTopics()};
 $('nameInp').value=store.get('m3_name','');
-function renderHistory(){
-  const h=store.get('m3_hist',[]);
+const TIERS={gold:'Золотой кубок',silver:'Серебряный кубок',bronze:'Бронзовый кубок',medal:'Медаль за старание'};
+function renderShelf(){const cups=store.get('m3q_cups',{});const rows=QUARTERS.filter(q=>cups[q.id]);
+  if(!rows.length){$('shelfCard').style.display='none';return}
+  $('shelfCard').style.display='';
+  $('shelf').innerHTML=rows.map((q,i)=>`<div class="sr"><b>${q.an} ${q.name}</b>${['gold','silver','bronze','medal'].filter(t=>cups[q.id][t]).map(t=>`<span class="cup" title="${TIERS[t]}">${trophySVG(t,'s'+i+t,34)}×${cups[q.id][t]}</span>`).join('')}</div>`).join('')}
+function renderHistory(){const h=store.get('m3q_hist',[]);
   if(!h.length){$('histCard').style.display='none';return}
-  $('histCard').style.display='block';
-  $('histList').innerHTML=h.slice(0,6).map(x=>`<div><span>${x.d}</span><span>✅ ${x.ok} из ${x.n}</span><span>⏱ ${fmtSec(x.t)}</span></div>`).join('');
-}
+  $('histCard').style.display='';
+  $('histList').innerHTML=h.slice(0,6).map(x=>`<div><span>${x.d}</span><span>${x.q}</span><span>✅ ${x.ok} из ${x.n}</span><span>⏱ ${fmtSec(x.t)}</span></div>`).join('')}
 
-/* ---------- game state ---------- */
-const S={tasks:[],i:0,results:[],t0:0,checked:false,stars:0,combo:0,timer:null};
-function makeTasks(){
-  const ids=shuffle([...selected]);const tasks=[];const seen=new Set();
-  for(let i=0;i<count;i++){
-    const topic=TOPICS.find(t=>t.id===ids[i%ids.length]);let task,tries=0;
-    do{task=topic.gen();tries++}while(seen.has(task.text)&&tries<15);
-    seen.add(task.text);task.topic=topic;tasks.push(task);
-  }
-  return shuffle(tasks);
-}
+/* ================= trophy ================= */
+function trophySVG(tier,uid,size,label){
+  if(tier==='medal')return `<svg width="${size}" height="${size*1.1}" viewBox="0 0 200 220"><defs><radialGradient id="m${uid}"><stop offset="0" stop-color="#fef9c3"/><stop offset="1" stop-color="#f59e0b"/></radialGradient></defs>
+    <polygon points="60,0 95,0 120,90 85,90" fill="#3b82f6"/><polygon points="140,0 105,0 80,90 115,90" fill="#ef4444"/>
+    <circle cx="100" cy="140" r="62" fill="url(#m${uid})" stroke="#b45309" stroke-width="6"/>
+    <polygon points="100,98 111,124 139,126 117,144 124,172 100,157 76,172 83,144 61,126 89,124" fill="#fff" opacity=".9"/></svg>`;
+  const c={gold:['#fff3b0','#fbbf24','#b45309'],silver:['#ffffff','#cbd5e1','#64748b'],bronze:['#ffe0c2','#e08a4a','#8a3d12']}[tier];
+  return `<svg width="${size}" height="${size*1.1}" viewBox="0 0 200 220">
+  <defs><linearGradient id="g${uid}" x1="0" x2="1"><stop offset="0" stop-color="${c[2]}"/><stop offset=".45" stop-color="${c[0]}"/><stop offset=".7" stop-color="${c[1]}"/><stop offset="1" stop-color="${c[2]}"/></linearGradient></defs>
+  <path d="M52 48 C14 48 18 108 64 108" fill="none" stroke="${c[1]}" stroke-width="12" stroke-linecap="round"/>
+  <path d="M148 48 C186 48 182 108 136 108" fill="none" stroke="${c[1]}" stroke-width="12" stroke-linecap="round"/>
+  <path d="M45 25 H155 V70 C155 118 128 140 100 140 C72 140 45 118 45 70 Z" fill="url(#g${uid})" stroke="${c[2]}" stroke-width="3"/>
+  <rect x="88" y="138" width="24" height="28" fill="${c[1]}"/>
+  <rect x="66" y="164" width="68" height="14" rx="4" fill="url(#g${uid})"/>
+  <rect x="52" y="178" width="96" height="32" rx="6" fill="${c[2]}"/>
+  <polygon points="100,50 108,68 128,70 113,83 117,103 100,93 83,103 87,83 72,70 92,68" fill="#fff" opacity=".85"/>
+  <ellipse cx="68" cy="62" rx="7" ry="22" fill="#fff" opacity=".35"/>
+  ${label?`<text x="100" y="200" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="900" font-size="16" fill="#fff">${label}</text>`:''}
+  </svg>`}
+
+/* ================= game ================= */
+const S={tasks:[],i:0,results:[],t0:0,checked:false,stars:0,combo:0,timer:null,q:null,fix:false};
+function makeTasks(){const pool=shuffle(curQ.topics.filter(t=>selected.has(t.id)));const tasks=[],seen=new Set();
+  for(let i=0;i<count;i++){const topic=pool[i%pool.length];let task,tries=0;
+    do{task=topic.gen();tries++}while(seen.has(task.text)&&tries<20);
+    seen.add(task.text);task.topic=topic;tasks.push(task)}
+  return shuffle(tasks)}
 function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));$(id).classList.add('active');window.scrollTo(0,0)}
-function startGame(tasks){
-  S.tasks=tasks;S.i=0;S.results=[];S.stars=0;S.combo=0;
-  show('scrGame');renderDots();renderTask();
-}
+const nameStr=p=>{const n=$('nameInp').value.trim();return n?p+n:''};
+function startGame(tasks,fix){
+  S.tasks=tasks;S.i=0;S.results=[];S.stars=0;S.combo=0;S.q=curQ;S.fix=!!fix;
+  $('mascot').textContent=curQ.an;$('tRunner').textContent=curQ.an;$('tGoal').textContent=curQ.goal;
+  say(`Привет${nameStr(', ')}! Я ${curQ.who}. Помоги мне добраться до ${curQ.goal}!`);
+  show('scrGame');renderTask()}
 $('startBtn').onclick=()=>{
   if(!selected.size){$('startErr').textContent='Выбери хотя бы одну тему 🙂';return}
   $('startErr').textContent='';
-  store.set('m3_topics',[...selected]);store.set('m3_count',count);store.set('m3_name',$('nameInp').value.trim());
-  startGame(makeTasks());
-};
-
-function renderDots(){
-  $('dots').innerHTML=S.tasks.map((_,k)=>{const r=S.results[k];return `<div class="dot ${r?(r.ok?'ok':'bad'):''} ${k===S.i&&!S.checked?'cur':''}"></div>`}).join('');
-}
-function renderProgress(){
-  const n=S.tasks.length,done=S.results.length;
-  $('cProg').textContent=`Задание ${Math.min(S.i+1,n)} из ${n}`;
-  $('cStars').textContent=S.stars;
-  const pct=done/n*100;$('tFill').style.width=pct+'%';$('tRocket').style.left=`calc(${Math.max(4,pct)}% - ${pct>=100?24:0}px)`;
-  const c=$('cCombo');if(S.combo>=2){c.style.display='';c.querySelector('span').textContent='серия '+S.combo}else c.style.display='none';
-}
-function figSVG(f){
-  const W=300,H=170,maxW=200,maxH=110;const sc=Math.min(maxW/f.w,maxH/f.h);
-  const rw=Math.max(40,f.w*sc),rh=Math.max(40,f.h*sc),x=(W-rw)/2+16,y=(H-rh)/2+8;
-  return `<svg class="fig" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
-    <rect x="${x}" y="${y}" width="${rw}" height="${rh}" rx="4" fill="#eef4ff" stroke="#3b82f6" stroke-width="3"/>
-    <text x="${x+rw/2}" y="${y-10}" text-anchor="middle" font-family="Nunito" font-weight="800" font-size="16" fill="#1e2a4a">${f.lw}</text>
-    <text x="${x-10}" y="${y+rh/2+5}" text-anchor="end" font-family="Nunito" font-weight="800" font-size="16" fill="#1e2a4a">${f.lh}</text>
-  </svg>`;
-}
+  store.set('m3q_q',curQ.id);store.set('m3q_sel_'+curQ.id,[...selected]);store.set('m3q_count',count);store.set('m3_name',$('nameInp').value.trim());
+  startGame(makeTasks())};
+function say(t){const b=$('bubble');b.textContent=t;b.classList.remove('pop');void b.offsetWidth;b.classList.add('pop')}
+function mascotAnim(cls){const m=$('mascot');m.className='mascot';void m.offsetWidth;m.classList.add(cls);setTimeout(()=>m.className='mascot',850)}
+function renderDots(){$('dots').innerHTML=S.tasks.map((_,k)=>{const r=S.results[k];return `<div class="dot ${r?(r.ok?'ok':'bad'):''} ${k===S.i&&!S.checked?'cur':''}"></div>`}).join('')}
+function renderProgress(){const n=S.tasks.length,done=S.results.length;
+  $('cProg').textContent=`Задание ${Math.min(S.i+1,n)} из ${n}`;$('cStars').textContent=S.stars;
+  const pct=done/n*100;$('tRunner').style.left=`calc(${Math.max(3,pct)}% - ${pct>=100?14:0}px)`;
+  const c=$('cCombo');if(S.combo>=2){c.style.display='';c.querySelector('span').textContent='серия '+S.combo}else c.style.display='none'}
+function figSVG(f){const W=300,H=170,sc=Math.min(200/f.w,110/f.h);const rw=Math.max(40,f.w*sc),rh=Math.max(40,f.h*sc),x=(W-rw)/2+16,y=(H-rh)/2+8;
+  return `<svg class="fig" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}"><rect x="${x}" y="${y}" width="${rw}" height="${rh}" rx="4" fill="#eef4ff" stroke="#3b82f6" stroke-width="3"/>
+  <text x="${x+rw/2}" y="${y-10}" text-anchor="middle" font-family="Nunito" font-weight="800" font-size="16" fill="#1e2a4a">${f.lw}</text>
+  <text x="${x-10}" y="${y+rh/2+5}" text-anchor="end" font-family="Nunito" font-weight="800" font-size="16" fill="#1e2a4a">${f.lh}</text></svg>`}
+const ASK=['Реши-ка!','Подумай хорошенько 🤔','У тебя получится!','Ну-ка, попробуй!','Я в тебя верю!','Считай внимательно 👀'];
 function renderTask(){
   const t=S.tasks[S.i];S.checked=false;
+  const card=$('qcard');card.classList.remove('enter');void card.offsetWidth;card.classList.add('enter');
   $('qTag').innerHTML=`${t.topic.icon} ${t.topic.name}`;
-  const q=$('qText');q.className='qtext'+(t.kind==='word'?' word':'');
-  q.textContent=t.kind==='expr'?t.text+' =':t.text;
+  const q=$('qText');q.className='qtext'+(t.kind==='word'||(t.kind==='choice'&&t.text.length>30)?' word':'');
+  q.innerHTML=t.html||(t.kind==='expr'?t.text+' =':t.text);
   $('qHint').textContent=t.hint||(t.kind==='word'?'Прочитай задачу и запиши ответ':'');
   $('qFig').innerHTML=t.fig?figSVG(t.fig):'';
-  const two=t.fields.length>1;
-  $('qAns').innerHTML=t.fields.map((f,k)=>`${f.pre?`<span>${f.pre}</span>`:''}<input class="ans${two?' short':''}" data-k="${k}" inputmode="numeric" autocomplete="off" maxlength="5">${f.post?`<span>${f.post}</span>`:''}`).join('');
-  $('qAns').querySelectorAll('input').forEach(inp=>inp.addEventListener('input',()=>{inp.value=inp.value.replace(/\D/g,'')}));
+  const A=$('qAns');
+  if(t.kind==='choice'){
+    A.innerHTML=t.options.map((o,k)=>`<button class="opt" data-k="${k}">${o}</button>`).join('');
+    A.querySelectorAll('.opt').forEach(b=>b.onclick=()=>check(false,Number(b.dataset.k)));
+    $('checkBtn').style.display='none';
+  }else{
+    const tw=t.fields.length>1;
+    A.innerHTML=t.fields.map((f,k)=>`${f.pre?`<span>${f.pre}</span>`:''}<input class="ans${tw?' short':''}" data-k="${k}" inputmode="numeric" autocomplete="off" maxlength="5">${f.post?`<span>${f.post}</span>`:''}`).join('');
+    A.querySelectorAll('input').forEach(inp=>inp.addEventListener('input',()=>{inp.value=inp.value.replace(/\D/g,'')}));
+    $('checkBtn').style.display='';
+    setTimeout(()=>{const f=A.querySelector('input');f&&f.focus()},60);
+  }
   const fb=$('fb');fb.className='fb';fb.innerHTML='';
-  $('checkBtn').style.display='';$('nextBtn').style.display='none';$('skipBtn').style.display='';
+  $('nextBtn').style.display='none';$('skipBtn').style.display='';
+  if(S.i>0)say(pick(ASK));
   renderProgress();renderDots();
-  setTimeout(()=>{const f=$('qAns').querySelector('input');f&&f.focus()},50);
-  S.t0=performance.now();
-  clearInterval(S.timer);
+  S.t0=performance.now();clearInterval(S.timer);
   S.timer=setInterval(()=>{if(!S.checked)$('cTimer').textContent=fmtClock((performance.now()-S.t0)/1000)},250);
-  $('cTimer').textContent='0:00';
-}
+  $('cTimer').textContent='0:00'}
 const PRAISE=['Верно! Молодец!','Правильно! Так держать!','Супер! 🌟','Отлично!','Точно в цель! 🎯','Здорово!','Умница!'];
-function answerStr(t,vals){return t.fields.map((f,k)=>`${f.pre&&f.pre!=='Ответ:'?f.pre+' ':''}${vals[k]}${f.post?' '+f.post:''}`).join(' ')}
-function check(skip){
+const HAPPY=['Ура! Ещё шаг вперёд! 🐾','Вот это да! Ты настоящий математик!','Прыгаю от радости!','Ты лучше всех!','Так держать!'];
+const SAD=['Ой! Ничего, разберёмся вместе.','Не расстраивайся, в следующий раз получится!','Посмотри правильный ответ и запомни 😉'];
+function answerStr(t,vals){if(t.kind==='choice')return t.options[vals[0]];return t.fields.map((f,k)=>`${f.pre&&f.pre!=='Ответ:'?f.pre+' ':''}${vals[k]}${f.post?' '+f.post:''}`).join(' ')}
+function burst(el){const r=el.getBoundingClientRect();for(let i=0;i<14;i++){const s=document.createElement('span');s.className='spark';s.textContent=pick(['⭐','✨','🌟','💫']);
+  s.style.left=r.left+r.width/2+'px';s.style.top=r.top+r.height/2+'px';const a=Math.random()*Math.PI*2,d=70+Math.random()*90;
+  s.style.setProperty('--dx',Math.cos(a)*d+'px');s.style.setProperty('--dy',Math.sin(a)*d+'px');document.body.appendChild(s);setTimeout(()=>s.remove(),950)}}
+function check(skip,choice){
   if(S.checked)return;
-  const t=S.tasks[S.i];const inputs=[...$('qAns').querySelectorAll('input')];
-  if(!skip){
-    const empty=inputs.find(i=>i.value==='');
-    if(empty){empty.classList.remove('shake');void empty.offsetWidth;empty.classList.add('shake');empty.focus();return}
+  const t=S.tasks[S.i];let vals,ok;
+  if(t.kind==='choice'){
+    if(!skip&&choice==null)return;
+    vals=skip?null:[choice];ok=!skip&&choice===t.answers[0];
+    $('qAns').querySelectorAll('.opt').forEach((b,k)=>{b.disabled=true;if(k===t.answers[0])b.classList.add('ok');else if(k===choice)b.classList.add('bad')});
+  }else{
+    const inputs=[...$('qAns').querySelectorAll('input')];
+    if(!skip){const empty=inputs.find(i=>i.value==='');if(empty){empty.classList.remove('shake');void empty.offsetWidth;empty.classList.add('shake');empty.focus();return}}
+    vals=skip?null:inputs.map(i=>i.value);
+    ok=!skip&&vals.every((v,k)=>parseInt(v,10)===t.answers[k]);
+    inputs.forEach((inp,k)=>{inp.disabled=true;inp.classList.add(!skip&&parseInt(inp.value,10)===t.answers[k]?'ok':'bad')});
   }
   const time=(performance.now()-S.t0)/1000;S.checked=true;
-  const vals=inputs.map(i=>i.value);
-  const ok=!skip&&vals.every((v,k)=>parseInt(v,10)===t.answers[k]);
-  inputs.forEach((inp,k)=>{inp.disabled=true;inp.classList.add(!skip&&parseInt(inp.value,10)===t.answers[k]?'ok':'bad')});
-  S.results.push({task:t,given:skip?null:vals,ok,time});
+  S.results.push({task:t,given:vals,ok,time});
   const fb=$('fb');
-  if(ok){S.stars++;S.combo++;fb.className='fb ok';fb.innerHTML=`✅ ${pick(PRAISE)}${S.combo>=3?` Серия ${S.combo} подряд! 🔥`:''}<div class="t">Время: ${fmtSec(time)}</div>`;beep(true)}
-  else{S.combo=0;fb.className='fb bad';fb.innerHTML=`${skip?'💡 Ничего страшного!':'❌ Не совсем.'} Правильный ответ: ${answerStr(t,t.answers)}<div class="t">Время: ${fmtSec(time)}</div>`;beep(false)}
+  if(ok){S.stars++;S.combo++;fb.className='fb ok';fb.innerHTML=`✅ ${pick(PRAISE)}${S.combo>=3?` Серия ${S.combo} подряд! 🔥`:''}<div class="t">Время: ${fmtSec(time)}</div>`;
+    beep(true);mascotAnim('jump');say(pick(HAPPY));burst($('qAns'));const ch=$('cStarsChip');ch.classList.remove('pop');void ch.offsetWidth;ch.classList.add('pop')}
+  else{S.combo=0;fb.className='fb bad';fb.innerHTML=`${skip?'💡 Ничего страшного!':'❌ Не совсем.'} Правильный ответ: ${answerStr(t,t.answers)}<div class="t">Время: ${fmtSec(time)}</div>`;
+    beep(false);mascotAnim('sad');say(pick(SAD))}
   $('cTimer').textContent=fmtClock(time);
   $('checkBtn').style.display='none';$('skipBtn').style.display='none';
-  const nb=$('nextBtn');nb.style.display='';nb.textContent=S.i+1<S.tasks.length?'Дальше →':'Посмотреть итоги 🏁';
-  renderProgress();renderDots();
-  setTimeout(()=>nb.focus(),30);
-}
+  const nb=$('nextBtn');nb.style.display='';nb.textContent=S.i+1<S.tasks.length?'Дальше →':'Получить награду 🏆';
+  renderProgress();renderDots();setTimeout(()=>nb.focus(),30)}
 function next(){S.i++;if(S.i<S.tasks.length)renderTask();else finish()}
 $('checkBtn').onclick=()=>check(false);
 $('skipBtn').onclick=()=>check(true);
@@ -465,76 +662,69 @@ document.addEventListener('keydown',e=>{
   if(e.target.tagName==='BUTTON')return;
   e.preventDefault();
   if(!S.checked){
+    if(S.tasks[S.i].kind==='choice')return;
     const inputs=[...$('qAns').querySelectorAll('input')];const idx=inputs.indexOf(e.target);
     if(idx>=0&&idx<inputs.length-1&&inputs[idx].value!==''){inputs[idx+1].focus();return}
     check(false);
-  }else next();
-});
+  }else next()});
 
-/* ---------- results ---------- */
+/* ================= results ================= */
+const qText=t=>t.kind==='expr'?t.text+' = ?':t.text;
+function short(t){const s=qText(t);return s.length>48?s.slice(0,46)+'…':s}
 function finish(){
   clearInterval(S.timer);
   const R=S.results,n=R.length,okN=R.filter(r=>r.ok).length,total=R.reduce((a,r)=>a+r.time,0);
   const pct=Math.round(okN/n*100),avg=total/n;
   const fast=R.reduce((a,r)=>r.time<a.time?r:a,R[0]),slow=R.reduce((a,r)=>r.time>a.time?r:a,R[0]);
-  const name=$('nameInp').value.trim();
-  let medal,title;
-  if(pct===100){medal='🏆';title='Великолепно'}else if(pct>=80){medal='🥇';title='Отлично'}else if(pct>=60){medal='🥈';title='Хорошо'}else if(pct>=40){medal='🥉';title='Неплохо'}else{medal='💪';title='Есть над чем поработать'}
-  $('rMedal').textContent=medal;$('rTitle').textContent=title+(name?', '+name:'')+'!';
-  $('rSub').textContent=pct===100?'Ни одной ошибки — ракета долетела до планеты!':`Решено верно ${okN} из ${n}. ${okN<n?'Ошибки можно исправить — кнопка ниже.':''}`;
-  $('rTiles').innerHTML=[
-    ['✅ Верно',`${okN} из ${n}`],['🎯 Точность',pct+'%'],['⏱ Всего времени',fmtSec(total)],['⌛ В среднем',fmtSec(avg)],
-    ['⚡ Быстрее всего',fmtSec(fast.time)],['🐢 Дольше всего',fmtSec(slow.time)]
-  ].map(([k,v])=>`<div class="tile"><div class="k">${k}</div><div class="v">${v}</div></div>`).join('');
+  const tier=pct>=90?'gold':pct>=70?'silver':pct>=50?'bronze':'medal';
+  $('rTrophy').innerHTML=trophySVG(tier,'big',190,S.q.short);
+  const tr=$('rTrophy');tr.style.animation='none';void tr.offsetWidth;tr.style.animation='';
+  $('rRays').style.display=tier==='medal'?'none':'';
+  const party=[S.q.an,'🐰','🐻','🦊','🦉','🐼','🐿️','🦔'].filter((v,i,a)=>a.indexOf(v)===i).slice(0,6);
+  $('rParty').innerHTML=party.map(a=>`<span>${a}</span>`).join('');
+  $('rTitle').textContent=TIERS[tier]+'!';
+  const nm=$('nameInp').value.trim();
+  const msg={gold:'Блестяще! Ты настоящий чемпион математики!',silver:'Очень хорошо! Ещё чуть-чуть — и будет золото!',bronze:'Хорошая работа! Потренируйся ещё — и кубок станет ярче.',medal:'Ты старался! Исправь ошибки — и получишь кубок.'}[tier];
+  $('rSub').textContent=(nm?nm+', '+msg[0].toLowerCase()+msg.slice(1):msg)+` Верно ${okN} из ${n}.`;
+  $('rTiles').innerHTML=[['✅ Верно',`${okN} из ${n}`],['🎯 Точность',pct+'%'],['⏱ Всего времени',fmtSec(total)],['⌛ В среднем',fmtSec(avg)],['⚡ Быстрее всего',fmtSec(fast.time)],['🐢 Дольше всего',fmtSec(slow.time)]]
+    .map(([k,v])=>`<div class="tile"><div class="k">${k}</div><div class="v">${v}</div></div>`).join('');
   const maxT=Math.max(...R.map(r=>r.time));
-  $('rBars').innerHTML=R.map((r,k)=>`<div class="bar"><div>№${k+1}</div><div class="b" title="${r.task.text}"><i style="width:${Math.max(3,r.time/maxT*100)}%;background:${r.ok?'#86efac':'#fca5a5'}"></i><span>${short(r.task)}</span></div><div style="text-align:right">${fmtSec(r.time)}</div></div>`).join('');
-  // by topic
+  $('rBars').innerHTML=R.map((r,k)=>`<div class="bar"><div>№${k+1}</div><div class="b"><i style="width:${Math.max(3,r.time/maxT*100)}%;background:${r.ok?'#86efac':'#fca5a5'};animation-delay:${k*.05}s"></i><span>${short(r.task)}</span></div><div style="text-align:right">${fmtSec(r.time)}</div></div>`).join('');
   const by={};R.forEach(r=>{const id=r.task.topic.id;(by[id]=by[id]||{t:r.task.topic,n:0,ok:0,time:0});by[id].n++;by[id].ok+=r.ok;by[id].time+=r.time});
-  $('rTopics').innerHTML=`<tr><th>Тема</th><th>Заданий</th><th>Верно</th><th>Среднее время</th></tr>`+
-    Object.values(by).map(b=>`<tr><td>${b.t.icon} ${b.t.name}</td><td>${b.n}</td><td class="${b.ok===b.n?'ok-t':b.ok===0?'bad-t':''}">${b.ok} из ${b.n}</td><td>${fmtSec(b.time/b.n)}</td></tr>`).join('');
+  $('rTopics').innerHTML=`<tr><th>Тема</th><th>Заданий</th><th>Верно</th><th>Среднее время</th></tr>`+Object.values(by).map(b=>`<tr><td>${b.t.icon} ${b.t.name}</td><td>${b.n}</td><td class="${b.ok===b.n?'ok-t':b.ok===0?'bad-t':''}">${b.ok} из ${b.n}</td><td>${fmtSec(b.time/b.n)}</td></tr>`).join('');
   $('rTable').innerHTML=`<tr><th>№</th><th>Задание</th><th>Твой ответ</th><th>Правильный</th><th>Время</th><th></th></tr>`+
-    R.map((r,k)=>`<tr class="${r.ok?'':'bad'}"><td>${k+1}</td><td class="q">${r.task.kind==='expr'?r.task.text+' = ?':r.task.text}</td><td>${r.given?answerStr(r.task,r.given):'—'}</td><td>${answerStr(r.task,r.task.answers)}</td><td>${fmtSec(r.time)}</td><td class="${r.ok?'ok-t':'bad-t'}">${r.ok?'✓ верно':'✗ ошибка'}</td></tr>`).join('');
+    R.map((r,k)=>`<tr class="${r.ok?'':'bad'}"><td>${k+1}</td><td class="q">${qText(r.task)}</td><td>${r.given?answerStr(r.task,r.given):'—'}</td><td>${answerStr(r.task,r.task.answers)}</td><td>${fmtSec(r.time)}</td><td class="${r.ok?'ok-t':'bad-t'}">${r.ok?'✓ верно':'✗ ошибка'}</td></tr>`).join('');
   $('fixBtn').style.display=okN<n?'':'none';
-  const h=store.get('m3_hist',[]);const d=new Date();
-  h.unshift({d:d.toLocaleDateString('ru-RU')+' '+d.toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'}),ok:okN,n,t:total});store.set('m3_hist',h.slice(0,10));
+  if(!S.fix){const cups=store.get('m3q_cups',{});cups[S.q.id]=cups[S.q.id]||{};cups[S.q.id][tier]=(cups[S.q.id][tier]||0)+1;store.set('m3q_cups',cups)}
+  const h=store.get('m3q_hist',[]),d=new Date();
+  h.unshift({d:d.toLocaleDateString('ru-RU')+' '+d.toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'}),q:S.q.an+' '+S.q.name,ok:okN,n,t:total});store.set('m3q_hist',h.slice(0,10));
   show('scrResult');
-  if(pct>=70)confetti();
-}
-function short(t){const s=t.kind==='expr'?t.text:t.text;return s.length>48?s.slice(0,46)+'…':s}
-$('fixBtn').onclick=()=>{const wrong=S.results.filter(r=>!r.ok).map(r=>Object.assign({},r.task));startGame(shuffle(wrong))};
-$('againBtn').onclick=()=>startGame(makeTasks());
-$('menuBtn').onclick=()=>{renderHistory();show('scrStart')};
+  if(tier!=='medal'){fanfare();setTimeout(confetti,500)}}
+$('fixBtn').onclick=()=>{const wrong=S.results.filter(r=>!r.ok).map(r=>Object.assign({},r.task));curQ=S.q;startGame(shuffle(wrong),true)};
+$('againBtn').onclick=()=>{curQ=S.q;selected=loadSel(curQ);startGame(makeTasks())};
+$('menuBtn').onclick=()=>{renderShelf();renderHistory();renderQuarters();renderTopics();show('scrStart')};
 
-/* ---------- sound ---------- */
+/* ================= sound ================= */
 let soundOn=store.get('m3_sound',true),actx=null;
-function setSoundBtn(){$('soundBtn').textContent=soundOn?'🔊':'🔇'}
+const setSoundBtn=()=>$('soundBtn').textContent=soundOn?'🔊':'🔇';
 $('soundBtn').onclick=()=>{soundOn=!soundOn;store.set('m3_sound',soundOn);setSoundBtn()};
-function beep(ok){
-  if(!soundOn)return;
-  try{
-    actx=actx||new (window.AudioContext||window.webkitAudioContext)();
-    const notes=ok?[523,659,784]:[330,247];const now=actx.currentTime;
-    notes.forEach((f,i)=>{const o=actx.createOscillator(),g=actx.createGain();o.type=ok?'sine':'triangle';o.frequency.value=f;
-      const t=now+i*.11;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.18,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+.2);
-      o.connect(g);g.connect(actx.destination);o.start(t);o.stop(t+.22)});
-  }catch(e){}
-}
+function tones(notes,type,step){if(!soundOn)return;try{actx=actx||new (window.AudioContext||window.webkitAudioContext)();const now=actx.currentTime;
+  notes.forEach((f,i)=>{const o=actx.createOscillator(),g=actx.createGain();o.type=type;o.frequency.value=f;const t=now+i*step;
+    g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.18,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+step+.12);
+    o.connect(g);g.connect(actx.destination);o.start(t);o.stop(t+step+.15)})}catch(e){}}
+const beep=ok=>ok?tones([523,659,784],'sine',.11):tones([330,247],'triangle',.12);
+const fanfare=()=>tones([523,659,784,1047,784,1047],'triangle',.14);
 
-/* ---------- confetti ---------- */
-function confetti(){
-  const cv=$('confetti'),cx=cv.getContext('2d');cv.width=innerWidth;cv.height=innerHeight;
+/* ================= confetti ================= */
+function confetti(){const cv=$('confetti'),cx=cv.getContext('2d');cv.width=innerWidth;cv.height=innerHeight;
   const cols=['#3b82f6','#22c55e','#f59e0b','#ec4899','#8b5cf6','#06b6d4'];
-  const P=Array.from({length:140},()=>({x:Math.random()*cv.width,y:-20-Math.random()*cv.height*.5,vx:(Math.random()-.5)*3,vy:2+Math.random()*3,r:Math.random()*6,a:Math.random()*6,c:pick(cols),s:6+Math.random()*6}));
-  let frame=0;
-  (function loop(){
-    cx.clearRect(0,0,cv.width,cv.height);
+  const P=Array.from({length:160},()=>({x:Math.random()*cv.width,y:-20-Math.random()*cv.height*.6,vx:(Math.random()-.5)*3,vy:2+Math.random()*3,a:Math.random()*6,c:pick(cols),s:6+Math.random()*7}));
+  let f=0;(function loop(){cx.clearRect(0,0,cv.width,cv.height);
     P.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.a+=.1;cx.save();cx.translate(p.x,p.y);cx.rotate(p.a);cx.fillStyle=p.c;cx.fillRect(-p.s/2,-p.s/4,p.s,p.s/2);cx.restore()});
-    if(++frame<220)requestAnimationFrame(loop);else cx.clearRect(0,0,cv.width,cv.height);
-  })();
-}
+    if(++f<240)requestAnimationFrame(loop);else cx.clearRect(0,0,cv.width,cv.height)})()}
 
-/* ---------- init ---------- */
-renderTopics();renderCount();renderHistory();setSoundBtn();
+/* ================= init ================= */
+renderQuarters();renderTopics();renderCount();renderShelf();renderHistory();setSoundBtn();
 </script>
 </body>
 </html>
